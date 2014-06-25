@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="pl" ng-app="walletApp">
+<head>
+    <meta charset="utf-8">
+    <title>wallet</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+
+    <script src="scripts/walletApp.js"></script>
+    
+    <script src="scripts/controllers/walletController.js"></script>
+</head>
+
+<body ng-controller="WalletController">
+
+<h3>Twoje adresy:</h3>
+<ul>
+    <li ng-repeat=" address in wallet ">
+        {{ address }}
+    </li>
+</ul>
+
+</body>
+</html>
