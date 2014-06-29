@@ -6,7 +6,7 @@
     <title>wallet</title>
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="scripts/angular.min.js"></script>
 
@@ -18,7 +18,7 @@
 <body ng-controller="WalletController">
 
 <h3>Twoje adresy:</h3>
-<ul>
+<ul class="wallet-list">
     <li ng-repeat=" row in wallet ">
         {{ row.address }}
     </li>

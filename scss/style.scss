@@ -1,0 +1,20 @@
+
+
+.wallet-list {
+    $rowHeight: 30px;
+    width: 600px;
+    list-style-type: none;
+    background-color: #fee;
+    padding-left: 0;
+
+    li {
+        height: $rowHeight;
+        line-height: $rowHeight;
+        background-color: #eee;
+        padding: 0 10px;
+
+        &:hover {
+            background-color: #ddd;
+        }
+    }
+}
