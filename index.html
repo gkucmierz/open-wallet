@@ -7,7 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="style.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+
+    <script src="scripts/angular.min.js"></script>
 
     <script src="scripts/walletApp.js"></script>
     
@@ -18,10 +19,13 @@
 
 <h3>Twoje adresy:</h3>
 <ul>
-    <li ng-repeat=" address in wallet ">
-        {{ address }}
+    <li ng-repeat=" row in wallet ">
+        {{ row.address }}
     </li>
 </ul>
+
+<input type="text" ng-model="address" placeholder="address / privkey" />
+<input type="button" ng-click="addAddress()" value="+" />
 
 </body>
 </html>
