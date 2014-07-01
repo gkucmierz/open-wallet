@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('walletApp')
-.controller('WalletController', function($scope) {
+.controller('WalletController', function($scope, $http) {
 
     $scope.wallet = [{
         address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'
@@ -11,5 +11,30 @@ angular.module('walletApp')
         $scope.wallet.push({
             address: $scope.address
         });
+    };
+
+    $scope.checkBalances = function() {
+        var pattern = 'http://www.corsproxy.com/blockchain.info/address/%address%?format=json';
+        var i = 0;
+
+        (function loop() {
+            var row = $scope.wallet[i++];
+            if (i > $scope.wallet.length) return;
+
+            var url = pattern.replace('%address%', row.address);
+
+            $http({method: 'GET', url: url})
+            .success(function(data, status, headers, config) {
+                row.received = data.total_received;
+                row.sent = data.total_sent;
+                row.balance = row.received - row.sent;
+                loop();
+            })
+            .error(function(data, status, headers, config) {
+                --i;
+                loop(); // try again
+            });
+        })();
+            
     };
 });

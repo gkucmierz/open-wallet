@@ -18,9 +18,15 @@
 <body ng-controller="WalletController">
 
 <h3>Twoje adresy:</h3>
+
+<input type="button" ng-click="checkBalances()" value="&#8634;" />
+
 <ul class="wallet-list">
     <li ng-repeat=" row in wallet ">
         {{ row.address }}
+        <span ng-if="!!row.balance">
+        - {{ row.balance * 1e-8 }} BTC
+        </span>
     </li>
 </ul>
 
