@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/style.css">
 
     <!-- vendor -->
+    <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
+
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/ngstorage/ngStorage.min.js"></script>
     <script src="vendor/lodash/lodash.js"></script>
@@ -31,6 +33,9 @@
         {{ row.address }}
         <span ng-if="!!row.balance">
             - {{ row.balance * 1e-8 }} BTC
+        </span>
+        <span class="trash" ng-click="deleteRow(row)">
+            <i class="fa fa-trash-o"></i>
         </span>
     </li>
 </ul>

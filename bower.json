@@ -5,6 +5,7 @@
     "angular": "1.2.2",
     "momentjs": "~2.6.0",
     "lodash": "1.2.0",
-    "ngstorage": "0.3.0"
+    "ngstorage": "0.3.0",
+    "fontawesome": "~4.0.3"
   }
 }

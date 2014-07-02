@@ -15,6 +15,13 @@ angular.module('walletApp')
         });
     };
 
+    $scope.deleteRow = function(row) {
+        var index = $scope.$storage.wallet.indexOf(row);
+        if (index !== -1) {
+            $scope.$storage.wallet.splice(index, 1);
+        }
+    };
+
     $scope.checkBalances = function() {
         var pattern = 'http://www.corsproxy.com/blockchain.info/address/%address%?format=json';
         var i = 0;
