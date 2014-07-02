@@ -1,13 +1,10 @@
 {
-    "name": "open-wallet",
-    "dependencies": {
-        "jquery": "2.1.0",
-        "angular": "1.2.2",
-        "angularLocalStorage": "0.1.7",
-        "momentjs": "~2.6.0",
-        "lodash": "1.2.0"
-    },
-    "resolutions": {
-        "angular": "1.2.2"
-    }
+  "name": "open-wallet",
+  "dependencies": {
+    "jquery": "2.1.0",
+    "angular": "1.2.2",
+    "momentjs": "~2.6.0",
+    "lodash": "1.2.0",
+    "ngstorage": "0.3.0"
+  }
 }
