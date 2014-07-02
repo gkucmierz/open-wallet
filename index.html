@@ -8,16 +8,20 @@
     <meta name="author" content="">
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="scripts/angular.min.js"></script>
+    <!-- vendor -->
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/lodash/lodash.js"></script>
 
+    <!-- app -->
     <script src="scripts/walletApp.js"></script>
     
+    <!-- controllers -->
     <script src="scripts/controllers/walletController.js"></script>
 </head>
 
 <body ng-controller="WalletController">
 
-<h3>Twoje adresy:</h3>
+<h3>Your addresses:</h3>
 
 <input type="button" ng-click="checkBalances()" value="&#8634;" />
 
