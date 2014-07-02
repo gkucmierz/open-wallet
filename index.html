@@ -25,13 +25,15 @@
     <li ng-repeat=" row in wallet ">
         {{ row.address }}
         <span ng-if="!!row.balance">
-        - {{ row.balance * 1e-8 }} BTC
+            - {{ row.balance * 1e-8 }} BTC
         </span>
     </li>
 </ul>
 
 <input type="text" ng-model="address" placeholder="address / privkey" />
 <input type="button" ng-click="addAddress()" value="+" />
+
+<br/>Sum of all balances in wallet: {{ sumBalances() * 1e-8 }}
 
 </body>
 </html>

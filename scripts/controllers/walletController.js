@@ -35,6 +35,11 @@ angular.module('walletApp')
                 loop(); // try again
             });
         })();
-            
+    };
+
+    $scope.sumBalances = function() {
+        return $scope.wallet.reduce(function(sum, row) {
+            return sum + row.balance;
+        }, 0);
     };
 });
