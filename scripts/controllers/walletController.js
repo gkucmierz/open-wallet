@@ -38,7 +38,7 @@ angular.module('walletApp')
     };
 
     $scope.sumBalances = function() {
-        return $scope.wallet.reduce(function(sum, row) {
+        return _.reduce($scope.wallet, function(sum, row) {
             return sum + row.balance;
         }, 0);
     };
