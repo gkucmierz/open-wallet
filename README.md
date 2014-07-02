@@ -1,6 +1,8 @@
 open-wallet
 ===========
 
+development procedures:
+
 - npm install
-- grunt
 - bower install
+- grunt
