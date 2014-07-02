@@ -4,7 +4,6 @@
     $rowHeight: 30px;
     width: 600px;
     list-style-type: none;
-    background-color: #fee;
     padding-left: 0;
 
     li {
@@ -12,6 +11,7 @@
         line-height: $rowHeight;
         background-color: #eee;
         padding: 0 10px;
+        margin-bottom: 1px;
 
         &:hover {
             background-color: #ddd;
