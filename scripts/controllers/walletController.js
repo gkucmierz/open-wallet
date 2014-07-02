@@ -3,9 +3,9 @@
 angular.module('walletApp')
 .controller('WalletController', function($scope, $http) {
 
-    $scope.wallet = [{
-        address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'
-    }];
+    $scope.wallet = [
+        {address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'}
+    ];
 
     $scope.addAddress = function() {
         $scope.wallet.push({
