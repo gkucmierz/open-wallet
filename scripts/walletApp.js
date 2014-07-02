@@ -1,20 +1,10 @@
 'use strict';
 
-var walletApp = angular.module('walletApp', []);
+var walletApp = angular.module('walletApp', ['ngStorage']);
 
 walletApp.config(function() {
 
 });
-
-
-// walletApp.config([
-//     '$httpProvider',
-//     function($httpProvider) {
-//         $httpProvider.defaults.useXDomain = true;
-//         delete $httpProvider.defaults.headers.common['X-Requested-With'];
-//     }
-// ]);
-
 
 
 walletApp.config(function($httpProvider) {
