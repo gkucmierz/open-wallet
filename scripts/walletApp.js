@@ -1,6 +1,6 @@
 'use strict';
 
-var walletApp = angular.module('walletApp', []);
+var walletApp = angular.module('walletApp', ['ngStorage']);
 
 walletApp.config(function() {
 

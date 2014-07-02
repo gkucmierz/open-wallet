@@ -10,6 +10,7 @@
 
     <!-- vendor -->
     <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/ngstorage/ngStorage.min.js"></script>
     <script src="vendor/lodash/lodash.js"></script>
 
     <!-- app -->
@@ -26,7 +27,7 @@
 <input type="button" ng-click="checkBalances()" value="&#8634;" />
 
 <ul class="wallet-list">
-    <li ng-repeat=" row in wallet ">
+    <li ng-repeat=" row in $storage.wallet ">
         {{ row.address }}
         <span ng-if="!!row.balance">
             - {{ row.balance * 1e-8 }} BTC

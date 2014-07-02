@@ -1,14 +1,16 @@
 'use strict';
 
 angular.module('walletApp')
-.controller('WalletController', function($scope, $http) {
+.controller('WalletController', function($scope, $http, $localStorage) {
 
-    $scope.wallet = [
-        {address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'}
-    ];
+    $scope.$storage = $localStorage.$default({
+        wallet: [
+            {address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'}
+        ]
+    });
 
     $scope.addAddress = function() {
-        $scope.wallet.push({
+        $scope.$storage.wallet.push({
             address: $scope.address
         });
     };
@@ -18,8 +20,8 @@ angular.module('walletApp')
         var i = 0;
 
         (function loop() {
-            var row = $scope.wallet[i++];
-            if (i > $scope.wallet.length) return;
+            var row = $scope.$storage.wallet[i++];
+            if (i > $scope.$storage.wallet.length) return;
 
             var url = pattern.replace('%address%', row.address);
 
@@ -38,7 +40,7 @@ angular.module('walletApp')
     };
 
     $scope.sumBalances = function() {
-        return _.reduce($scope.wallet, function(sum, row) {
+        return _.reduce($scope.$storage.wallet, function(sum, row) {
             return sum + row.balance;
         }, 0);
     };
