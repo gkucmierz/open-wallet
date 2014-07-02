@@ -6,3 +6,4 @@ Thumbs.db
 *.css
 
 /node_modules/
+/vendor/
