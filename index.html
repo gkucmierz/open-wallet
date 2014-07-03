@@ -32,7 +32,7 @@
     <li ng-repeat=" row in $storage.wallet ">
         {{ row.address }}
         <span ng-if="!!row.balance">
-            - {{ row.balance * 1e-8 }} BTC
+            - {{ row.balance * 1e-8 }} <i class="fa fa-btc"></i>
         </span>
         <span class="trash" ng-click="deleteRow(row)">
             <i class="fa fa-trash-o"></i>
