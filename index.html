@@ -28,22 +28,53 @@
 
 <input type="button" ng-click="checkBalances()" value="&#8634;" />
 
+<div class="wallet-header">
+    <span class="address">
+        Address
+    </span>
+
+    <span class="received">
+        <span>
+            Received <i class="fa fa-btc"></i>
+        </span>
+        <span class="sum">
+            {{ sumBalances('received') * 1e-8 }}
+        </span>
+    </span>
+
+    <span class="balance">
+        <span>
+            Balance <i class="fa fa-btc"></i>
+        </span>
+        <span class="sum">
+            {{ sumBalances() * 1e-8 }}
+        </span>
+    </span>
+</div>
 <ul class="wallet-list">
     <li ng-repeat=" row in $storage.wallet ">
-        {{ row.address }}
-        <span ng-if="!!row.balance">
-            - {{ row.balance * 1e-8 }} <i class="fa fa-btc"></i>
+        <span class="address">
+            {{ row.address }}
         </span>
+
+        <span class="received">
+            {{ row.received * 1e-8 }}
+        </span>
+
+        <span class="balance">
+            {{ row.balance * 1e-8 }}
+        </span>
+
         <span class="trash" ng-click="deleteRow(row)">
             <i class="fa fa-trash-o"></i>
         </span>
     </li>
 </ul>
 
+<br/>
+
 <input type="text" ng-model="address" placeholder="address / privkey" />
 <input type="button" ng-click="addAddress()" value="+" />
-
-<br/>Sum of all balances in wallet: {{ sumBalances() * 1e-8 }}
 
 </body>
 </html>
