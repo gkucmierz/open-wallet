@@ -23,6 +23,15 @@ module.exports = function (grunt) {
                 files: sassFiles
             }
         },
+        jshint: {
+            options: {
+                jshintrc: '.jshintrc'
+            },
+            all: [
+                'Gruntfile.js',
+                'scripts/{,*/}*.js'
+            ]
+        },
         watch: {
             sass: {
                 files: [
@@ -41,8 +50,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.registerTask('compile', ['sass']);
+    grunt.registerTask('lint', ['jshint']);
 
     grunt.registerTask('default', [
-        'sass'
+        'sass',
+        'lint'
     ]);
 };
