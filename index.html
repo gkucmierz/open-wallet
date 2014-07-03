@@ -20,6 +20,10 @@
     
     <!-- controllers -->
     <script src="scripts/controllers/walletController.js"></script>
+
+    <!-- filters -->
+    <script src="scripts/filters/btc.js"></script>
+
 </head>
 
 <body ng-controller="WalletController">
@@ -58,11 +62,11 @@
         </span>
 
         <span class="received">
-            {{ row.received * 1e-8 }}
+            {{ row.received * 1e-8 | btc }}
         </span>
 
         <span class="balance">
-            {{ row.balance * 1e-8 }}
+            {{ row.balance * 1e-8 | btc }}
         </span>
 
         <span class="trash" ng-click="deleteRow(row)">
