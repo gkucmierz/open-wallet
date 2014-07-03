@@ -32,14 +32,18 @@ angular.module('walletApp')
 
             var url = pattern.replace('%address%', row.address);
 
+            var pick = function(obj, prop) {
+                return obj[prop];
+            };
+
             $http({method: 'GET', url: url})
-            .success(function(data, status, headers, config) {
-                row.received = data.total_received;
-                row.sent = data.total_sent;
+            .success(function(data) {
+                row.received = pick(data, 'total_received');
+                row.sent = pick(data, 'total_sent');
                 row.balance = row.received - row.sent;
                 loop();
             })
-            .error(function(data, status, headers, config) {
+            .error(function() {
                 --i;
                 loop(); // try again
             });
