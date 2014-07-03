@@ -21,6 +21,11 @@ $walletRowHeight: 26px;
         &:hover {
             background-color: rgba(255,255,255,0.1);
         }
+        // & > span {
+        //     &:hover {
+        //         background-color: rgba(255,0,0,0.1);
+        //     }   
+        // }
     }
 }
 
@@ -28,7 +33,6 @@ $walletRowHeight: 26px;
     background-color: #666;
     color: #fff;
     height: $walletRowHeight * 2;
-    line-height: $walletRowHeight * 2;
     margin-bottom: 1px;
     width: $walletWidth;
 
@@ -38,12 +42,17 @@ $walletRowHeight: 26px;
         text-align: center;
     }
 
+    .address {
+        line-height: $walletRowHeight * 2;
+        vertical-align: top;
+    }
+
     .received,
     .balance {
         & > span {
+            display: block;
             height: $walletRowHeight;
             line-height: $walletRowHeight;
-            display: block;
         }
         .sum {
             text-align: right;
