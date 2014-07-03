@@ -61,11 +61,17 @@
             {{ row.address }}
         </span>
 
-        <span class="received">
+        <span
+            class="received"
+            ng-class="{ soft: row.received === 0 }"
+        >
             {{ row.received * 1e-8 | btc }}
         </span>
 
-        <span class="balance">
+        <span
+            class="balance"
+            ng-class="{ soft: row.balance === 0 }"
+        >
             {{ row.balance * 1e-8 | btc }}
         </span>
 
