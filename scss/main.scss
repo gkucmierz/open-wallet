@@ -17,7 +17,7 @@ $walletRowHeight: 26px;
         width: 100px;
     }
 
-    span {
+    & > span {
         &:hover {
             background-color: rgba(255,255,255,0.1);
         }
@@ -38,6 +38,17 @@ $walletRowHeight: 26px;
         text-align: center;
     }
 
+    .received,
+    .balance {
+        & > span {
+            height: $walletRowHeight;
+            line-height: $walletRowHeight;
+            display: block;
+        }
+        .sum {
+            text-align: right;
+        }
+    }
 }
 
 .wallet-list {

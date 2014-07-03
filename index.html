@@ -34,11 +34,21 @@
     </span>
 
     <span class="received">
-        Received <i class="fa fa-btc"></i>
+        <span>
+            Received <i class="fa fa-btc"></i>
+        </span>
+        <span class="sum">
+            {{ sumBalances('received') * 1e-8 }}
+        </span>
     </span>
 
     <span class="balance">
-        Balance <i class="fa fa-btc"></i>
+        <span>
+            Balance <i class="fa fa-btc"></i>
+        </span>
+        <span class="sum">
+            {{ sumBalances() * 1e-8 }}
+        </span>
     </span>
 </div>
 <ul class="wallet-list">
@@ -61,10 +71,10 @@
     </li>
 </ul>
 
+<br/>
+
 <input type="text" ng-model="address" placeholder="address / privkey" />
 <input type="button" ng-click="addAddress()" value="+" />
-
-<br/>Sum of all balances in wallet: {{ sumBalances() * 1e-8 }}
 
 </body>
 </html>
