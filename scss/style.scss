@@ -1,32 +1,10 @@
 
+// Mixins
+@import "mixins";
 
-.wallet-list {
-    $rowHeight: 30px;
-    list-style-type: none;
-    padding-left: 0;
+// Variables
+// @import "colors";
+// @import "sizes";
+// @import "fonts";
 
-    li {
-        position: relative;
-        height: $rowHeight;
-        line-height: $rowHeight;
-        width: 600px;
-        background-color: #eee;
-        padding: 0 10px;
-        margin-bottom: 1px;
-
-        &:hover {
-            background-color: #ddd;
-        }
-
-        .trash {
-            position: absolute;
-            right: 0;
-            padding: 0 8px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: rgba(0,0,0,0.1);
-            }
-        }
-    }
-}
+@import "main";

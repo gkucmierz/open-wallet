@@ -10,7 +10,7 @@ module.exports = function (grunt) {
             }
         });
     };
-    var sassFiles = prepareSassFiles('scss/*.scss');
+    var sassFiles = prepareSassFiles('scss/style.scss');
 
     grunt.initConfig({
         sass: {
