@@ -49,7 +49,8 @@ angular.module('walletApp')
     $scope.sumBalances = function(type) {
         type = type || 'balance';
         return _.reduce($scope.$storage.wallet, function(sum, row) {
-            return sum + row[type];
+            var val = row[type]+0 ? row[type] : 0;
+            return sum + val;
         }, 0);
     };
 });
