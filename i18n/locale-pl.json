@@ -1,0 +1,17 @@
+{
+    "LANGUAGE": "polski",
+    "WALLET": {
+        "TITLE": "Twój portfel",
+        "TABLE_HEADER": {
+            "ADDRESS": "Adres",
+            "RECEIVED": "Otrzymane",
+            "BALANCE": "Stan konta"
+        },
+        "TABLE_ENTRIES": {
+            "DELETE": "usuń"
+        },
+        "ADD": {
+            "PLACEHOLDER": "adres / klucz prywatny"
+        }
+    }
+}
