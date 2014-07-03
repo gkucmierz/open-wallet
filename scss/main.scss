@@ -85,6 +85,10 @@ $walletRowHeight: 26px;
         .received,
         .balance {
             text-align: right;
+
+            &.soft {
+                color: #aaa;
+            }
         }
 
         .trash {
