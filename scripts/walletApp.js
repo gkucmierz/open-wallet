@@ -1,13 +1,9 @@
 'use strict';
 
-var walletApp = angular.module('walletApp', ['ngStorage']);
+angular.module('walletApp', ['ngStorage']);
 
-walletApp.config(function() {
-
-});
-
-
-walletApp.config(function($httpProvider) {
+angular.module('walletApp')
+.config(function($httpProvider) {
     //Enable cross domain calls
     $httpProvider.defaults.useXDomain = true;
 
