@@ -13,6 +13,9 @@
 
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/ngstorage/ngStorage.min.js"></script>
+    <script src="vendor/angular-translate/angular-translate.js"></script>
+    <script src="vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+
     <script src="vendor/lodash/lodash.js"></script>
 
     <!-- app -->
@@ -20,71 +23,81 @@
     
     <!-- controllers -->
     <script src="scripts/controllers/walletController.js"></script>
+    <script src="scripts/controllers/mainController.js"></script>
 
     <!-- filters -->
     <script src="scripts/filters/btc.js"></script>
 
 </head>
 
-<body ng-controller="WalletController">
+<body ng-controller="MainController">
 
-<h3>Your wallet:</h3>
 
-<input type="button" ng-click="checkBalances()" value="&#8634;" />
+<span class="i18n">
+    <button ng-click="setTranslation('pl')">pl</button>
+    <button ng-click="setTranslation('en')">en</button>
+    {{ 'LANGUAGE' | translate }}
+</span>
 
-<div class="wallet-header">
-    <span class="address">
-        Address
-    </span>
+<h3>{{ 'WALLET.TITLE' | translate }}</h3>
 
-    <span class="received">
-        <span>
-            Received <i class="fa fa-btc"></i>
-        </span>
-        <span class="sum">
-            {{ sumBalances('received') * 1e-8 | btc }}
-        </span>
-    </span>
+<div ng-controller="WalletController">
+    <input type="button" ng-click="checkBalances()" value="&#8634;" />
 
-    <span class="balance">
-        <span>
-            Balance <i class="fa fa-btc"></i>
-        </span>
-        <span class="sum">
-            {{ sumBalances() * 1e-8 | btc }}
-        </span>
-    </span>
-</div>
-<ul class="wallet-list">
-    <li ng-repeat=" row in $storage.wallet ">
+    <div class="wallet-header">
         <span class="address">
-            {{ row.address }}
+            {{ 'WALLET.TABLE_HEADER.ADDRESS' | translate }}
         </span>
 
-        <span
-            class="received"
-            ng-class="{ soft: row.received === 0 }"
-        >
-            {{ row.received * 1e-8 | btc }}
+        <span class="received">
+            <span>
+                {{ 'WALLET.TABLE_HEADER.RECEIVED' | translate }} <i class="fa fa-btc"></i>
+            </span>
+            <span class="sum">
+                {{ sumBalances('received') * 1e-8 | btc }}
+            </span>
         </span>
 
-        <span
-            class="balance"
-            ng-class="{ soft: row.balance === 0 }"
-        >
-            {{ row.balance * 1e-8 | btc }}
+        <span class="balance">
+            <span>
+                {{ 'WALLET.TABLE_HEADER.BALANCE' | translate }} <i class="fa fa-btc"></i>
+            </span>
+            <span class="sum">
+                {{ sumBalances() * 1e-8 | btc }}
+            </span>
         </span>
+    </div>
+    <ul class="wallet-list">
+        <li ng-repeat=" row in $storage.wallet ">
+            <span class="address">
+                {{ row.address }}
+            </span>
 
-        <span class="trash" ng-click="deleteRow(row)">
-            <i class="fa fa-trash-o"></i>
-        </span>
-    </li>
-</ul>
+            <span
+                class="received"
+                ng-class="{ soft: row.received === 0 }"
+            >
+                {{ row.received * 1e-8 | btc }}
+            </span>
 
-<br/>
+            <span
+                class="balance"
+                ng-class="{ soft: row.balance === 0 }"
+            >
+                {{ row.balance * 1e-8 | btc }}
+            </span>
 
-<input type="text" ng-model="address" placeholder="address / privkey" />
-<input type="button" ng-click="addAddress()" value="+" />
+            <span class="trash" ng-click="deleteRow(row)" title="{{ 'WALLET.TABLE_ENTRIES.DELETE' | translate }}">
+                <i class="fa fa-trash-o"></i>
+            </span>
+        </li>
+    </ul>
+
+    <br/>
+
+    <input type="text" ng-model="address" placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}" />
+    <input type="button" ng-click="addAddress()" value="+" />
+</div>
 
 </body>
 </html>
