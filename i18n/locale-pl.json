@@ -9,6 +9,9 @@
         },
         "TABLE_ENTRIES": {
             "DELETE": "usuń"
+        },
+        "ADD": {
+            "PLACEHOLDER": "adres / klucz prywatny"
         }
     }
 }

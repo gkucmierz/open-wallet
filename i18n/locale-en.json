@@ -9,6 +9,9 @@
         },
         "TABLE_ENTRIES": {
             "DELETE": "delete"
+        },
+        "ADD": {
+            "PLACEHOLDER": "address / privkey"
         }
     }
 }
