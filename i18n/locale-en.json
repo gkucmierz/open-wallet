@@ -1,3 +1,14 @@
 {
-    "LANGUAGE": "english"
+    "LANGUAGE": "english",
+    "WALLET": {
+        "TITLE": "Your wallet",
+        "TABLE_HEADER": {
+            "ADDRESS": "Address",
+            "RECEIVED": "Received",
+            "BALANCE": "Balance"
+        },
+        "TABLE_ENTRIES": {
+            "DELETE": "delete"
+        }
+    }
 }

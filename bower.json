@@ -4,7 +4,6 @@
     "jquery": "2.1.0",
     "angular": "1.2.2",
     "angular-translate": "2.1.0",
-    "angular-translate-storage-local": "2.1.0",
     "angular-translate-loader-static-files": "2.1.0",
     "momentjs": "~2.6.0",
     "lodash": "1.2.0",

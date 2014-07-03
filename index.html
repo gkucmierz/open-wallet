@@ -14,7 +14,6 @@
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/ngstorage/ngStorage.min.js"></script>
     <script src="vendor/angular-translate/angular-translate.js"></script>
-    <script src="vendor/angular-translate-storage-local/angular-translate-storage-local.js"></script>
     <script src="vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 
     <script src="vendor/lodash/lodash.js"></script>
@@ -40,19 +39,19 @@
     {{ 'LANGUAGE' | translate }}
 </span>
 
-<h3>Your wallet:</h3>
+<h3>{{ 'WALLET.TITLE' | translate }}</h3>
 
 <div ng-controller="WalletController">
     <input type="button" ng-click="checkBalances()" value="&#8634;" />
 
     <div class="wallet-header">
         <span class="address">
-            Address
+            {{ 'WALLET.TABLE_HEADER.ADDRESS' | translate }}
         </span>
 
         <span class="received">
             <span>
-                Received <i class="fa fa-btc"></i>
+                {{ 'WALLET.TABLE_HEADER.RECEIVED' | translate }} <i class="fa fa-btc"></i>
             </span>
             <span class="sum">
                 {{ sumBalances('received') * 1e-8 | btc }}
@@ -61,7 +60,7 @@
 
         <span class="balance">
             <span>
-                Balance <i class="fa fa-btc"></i>
+                {{ 'WALLET.TABLE_HEADER.BALANCE' | translate }} <i class="fa fa-btc"></i>
             </span>
             <span class="sum">
                 {{ sumBalances() * 1e-8 | btc }}
@@ -88,7 +87,7 @@
                 {{ row.balance * 1e-8 | btc }}
             </span>
 
-            <span class="trash" ng-click="deleteRow(row)">
+            <span class="trash" ng-click="deleteRow(row)" title="{{ 'WALLET.TABLE_ENTRIES.DELETE' | translate }}">
                 <i class="fa fa-trash-o"></i>
             </span>
         </li>
