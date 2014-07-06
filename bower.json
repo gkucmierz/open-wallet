@@ -5,7 +5,7 @@
     "angular": "1.2.2",
     "angular-translate": "2.1.0",
     "angular-translate-loader-static-files": "2.1.0",
-    "momentjs": "~2.6.0",
+    "momentjs": "2.7.0",
     "lodash": "1.2.0",
     "ngstorage": "0.3.0",
     "fontawesome": "~4.0.3"
