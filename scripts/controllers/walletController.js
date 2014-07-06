@@ -13,6 +13,7 @@ angular.module('walletApp')
         $scope.$storage.wallet.push({
             address: $scope.address
         });
+		$scope.checkBalances();
     };
 
     $scope.deleteRow = function(row) {
@@ -25,29 +26,29 @@ angular.module('walletApp')
     $scope.checkBalances = function() {
         var pattern = 'http://www.corsproxy.com/blockchain.info/address/%address%?format=json';
         var i = 0;
-
-        (function loop() {
-            var row = $scope.$storage.wallet[i++];
-            if (i > $scope.$storage.wallet.length) return;
-
-            var url = pattern.replace('%address%', row.address);
-
-            var pick = function(obj, prop) {
+		var pick = function(obj, prop) {
                 return obj[prop];
             };
+		var check = function(){
+				var row = $scope.$storage.wallet[i];
+				var url = pattern.replace('%address%', row.address);
 
-            $http({method: 'GET', url: url})
-            .success(function(data) {
-                row.received = pick(data, 'total_received');
-                row.sent = pick(data, 'total_sent');
-                row.balance = row.received - row.sent;
-                loop();
-            })
-            .error(function() {
-                --i;
-                loop(); // try again
-            });
-        })();
+				$http({method: 'GET', url: url})
+				.success(function(data) {
+					row.received = pick(data, 'total_received');
+					row.sent = pick(data, 'total_sent');
+					row.balance = row.received - row.sent;
+				})
+				.error(function() {
+					row.received = 'err';
+					row.sent = 'err';
+					row.balance = 'err';
+				});
+			};
+		
+		for(i in $scope.$storage.wallet){
+			check();	
+		}	
     };
 
     $scope.sumBalances = function(type) {
