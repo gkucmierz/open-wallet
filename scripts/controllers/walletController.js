@@ -9,10 +9,20 @@ angular.module('walletApp')
         ]
     });
 
+    var addressExists = function(address) {
+        var wallet = $scope.$storage.wallet;
+        for (var i = 0, l = wallet.length; i < l; ++i) {
+            if (wallet[i].address === address) return true;
+        }
+        return false;
+    };
+
     $scope.addAddress = function() {
-        $scope.$storage.wallet.push({
-            address: $scope.address
-        });
+        if (!addressExists($scope.address)) {
+            $scope.$storage.wallet.push({
+                address: $scope.address
+            });
+        }
     };
 
     $scope.deleteRow = function(row) {
