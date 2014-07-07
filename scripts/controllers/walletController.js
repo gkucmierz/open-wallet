@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('walletApp')
-.controller('WalletController', function($scope, $http, $localStorage) {
+.controller('WalletController', function($scope, $localStorage, BitcoinDataService) {
 
     $scope.$storage = $localStorage.$default({
         wallet: [
@@ -23,29 +23,19 @@ angular.module('walletApp')
     };
 
     $scope.checkBalances = function() {
-        var pattern = 'http://www.corsproxy.com/blockchain.info/address/%address%?format=json';
         var i = 0;
 
         (function loop() {
             var row = $scope.$storage.wallet[i++];
             if (i > $scope.$storage.wallet.length) return;
 
-            var url = pattern.replace('%address%', row.address);
-
-            var pick = function(obj, prop) {
-                return obj[prop];
-            };
-
-            $http({method: 'GET', url: url})
-            .success(function(data) {
-                row.received = pick(data, 'total_received');
-                row.sent = pick(data, 'total_sent');
-                row.balance = row.received - row.sent;
+            BitcoinDataService.getBalance(row.address)
+            .then(function(data) {
+                _.extend(row, data);
                 loop();
-            })
-            .error(function() {
+            }, function() {
                 --i;
-                loop(); // try again
+                loop();
             });
         })();
     };
