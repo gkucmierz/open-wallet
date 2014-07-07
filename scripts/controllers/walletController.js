@@ -32,9 +32,6 @@ angular.module('walletApp')
 
             var url = pattern.replace('%address%', row.address);
 
-            var pick = function(obj, prop) {
-                return obj[prop];
-            };
 
             $http({method: 'GET', url: url})
             .success(function(data) {
