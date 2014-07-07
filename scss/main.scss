@@ -78,6 +78,11 @@ $walletRowHeight: 26px;
         &:hover {
             background-color: #ddd;
         }
+        @include build-prefix-values(transition, background-color 500ms ease);
+        &.blink {
+            background-color: #e44;
+            @include build-prefix-values(transition, background-color 0 ease);
+        }
 
         .address {
             padding: 0 10px;

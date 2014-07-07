@@ -71,7 +71,7 @@
         </span>
     </div>
     <ul class="wallet-list">
-        <li ng-repeat=" row in $storage.wallet ">
+        <li ng-repeat=" row in $storage.wallet " ng-class="{ blink: row.blink }">
             <span class="address">
                 {{ row.address }}
             </span>
