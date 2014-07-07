@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('walletApp')
-.controller('WalletController', function($scope, $localStorage, BitcoinDataService) {
+.controller('WalletController', function($scope, $timeout, $localStorage, BitcoinDataService) {
 
     $scope.$storage = $localStorage.$default({
         wallet: [
@@ -9,10 +9,26 @@ angular.module('walletApp')
         ]
     });
 
+    var findAddressRow = function(address) {
+        var wallet = $scope.$storage.wallet;
+        for (var i = 0, l = wallet.length; i < l; ++i) {
+            if (wallet[i].address === address) return wallet[i];
+        }
+        return false;
+    };
+
     $scope.addAddress = function() {
-        $scope.$storage.wallet.push({
-            address: $scope.address
-        });
+        var addressRow = findAddressRow($scope.address);
+        if (!addressRow) {
+            $scope.$storage.wallet.push({
+                address: $scope.address
+            });
+        } else {
+            addressRow.blink = true;
+            $timeout(function() {
+                delete addressRow.blink;
+            }, 0);
+        }
     };
 
     $scope.deleteRow = function(row) {
