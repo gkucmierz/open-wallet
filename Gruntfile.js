@@ -58,4 +58,20 @@ module.exports = function (grunt) {
         'sass',
         'lint'
     ]);
+
+    // git hooks registration
+    grunt.registerTask('install-hooks', function () {
+        var fs = require('fs');
+
+        // precommit hook is inside the repo as /hooks/pre-commit
+        // copy the hook file to the correct place in the .git directory
+        grunt.file.copy('hooks/pre-commit', '.git/hooks/pre-commit');
+
+        // chmod the file to readable and executable by all
+        fs.chmodSync('.git/hooks/pre-commit', '755');
+
+        // do the same with post-update hook
+        grunt.file.copy('hooks/post-merge', '.git/hooks/post-merge');
+        fs.chmodSync('.git/hooks/post-merge', '755');
+    });
 };
