@@ -20,10 +20,12 @@ angular.module('walletApp')
 
             $http({method: 'GET', url: url})
             .success(function(data) {
+                var received = pick(data, 'total_received');
+                var sent = pick(data, 'total_sent');
                 var res = {
-                    received: pick(data, 'total_received'),
-                    sent: pick(data, 'total_sent'),
-                    balance: row.received - row.sent
+                    received: received,
+                    sent: sent,
+                    balance: received - sent
                 };
                 deferred.resolve(res);
             })
