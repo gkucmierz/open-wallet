@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# go to main dir
+cd "$(git rev-parse --show-toplevel)"
+
+grunt default
+RETVAL=$?
+
+if [ $RETVAL -ne 0 ]
+then
+  exit 1
+fi
