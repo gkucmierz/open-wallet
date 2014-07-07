@@ -7,7 +7,6 @@ External Dependencies
   1. [Node.js](http://nodejs.org/)
   2. [Ruby](https://www.ruby-lang.org/en/downloads/)
   3. [SASS](http://sass-lang.com/) version `>3.3.7`
-  4. [SCSS-Lint](https://github.com/causes/scss-lint)
 
 Project setup
 ---------------------
