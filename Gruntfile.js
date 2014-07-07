@@ -55,8 +55,8 @@ module.exports = function (grunt) {
     grunt.registerTask('lint', ['jshint']);
 
     grunt.registerTask('default', [
-        'sass',
-        'lint'
+        'lint',
+        'sass'
     ]);
 
     // git hooks registration

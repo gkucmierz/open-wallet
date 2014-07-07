@@ -18,3 +18,13 @@ Project setup
   4. Run `npm install` - installs node modules
   5. Run `bower install` or `./node_modules/.bin/bower install` - installs vendor dependencies (external libraries)
   6. `grunt` or `./node_modules/.bin/grunt` - to run Grunt tasks
+  7. Register GIT hooks by running `grunt install-hooks`
+
+
+Grunt tasks
+-----------
+
+  * `grunt` - jshint & compiles SCSS files
+  * `grunt compile` - Compile SCSS files
+  * `grunt lint` - performs linting based on JSHint configuration and SCSS file linting
+  * `grunt watch` - watches SCSS files for changes, any other compilable asses could be added in future
