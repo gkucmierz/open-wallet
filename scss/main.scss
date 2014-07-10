@@ -109,3 +109,18 @@ $walletRowHeight: 26px;
         }
     }
 }
+
+.i18n {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #eee;
+    padding: 10px 15px;
+    border-left: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+
+    .flag-icon {
+        margin: 0 2px;
+        cursor: pointer;
+    }
+}
