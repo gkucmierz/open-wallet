@@ -1,6 +1,7 @@
 open-wallet
 ===========
 
+
 External Dependencies
 ---------------------
 
@@ -8,8 +9,9 @@ External Dependencies
   2. [Ruby](https://www.ruby-lang.org/en/downloads/)
   3. [SASS](http://sass-lang.com/) version `>3.3.7`
 
+
 Project setup
----------------------
+-------------
 
   1. Be sure that you have **nodejs package manager** installed
   2. Install bower package manager with `npm install -g bower`
@@ -27,3 +29,10 @@ Grunt tasks
   * `grunt compile` - Compile SCSS files
   * `grunt lint` - performs linting based on JSHint configuration and SCSS file linting
   * `grunt watch` - watches SCSS files for changes, any other compilable asses could be added in future
+
+
+Code quality guidelines
+-----------------------
+
+JavaScript should be hinted before every commit with .jshintrc configuration. All hinting and JS coding is based on
+AirBnb sample in [GitHub repo](https://github.com/airbnb/javascript).
