@@ -121,13 +121,11 @@ $walletRowHeight: 26px;
     & > span {
         display: inline-block;
         padding: 10px;
+        cursor: pointer;
         @include build-prefix-values(transition, background-color 150ms ease);
 
         &:hover {
             background-color: #bbb;
         }
-    }
-    .flag-icon {
-        cursor: pointer;
     }
 }

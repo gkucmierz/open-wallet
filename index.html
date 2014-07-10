@@ -37,8 +37,12 @@
 <body ng-controller="MainController">
 
 <span class="i18n">
-    <span><span class="flag-icon flag-icon-pl" ng-click="setTranslation('pl')"></span></span>
-    <span><span class="flag-icon flag-icon-us" ng-click="setTranslation('en')"></span></span>
+    <span ng-click="setTranslation('pl')">
+        <span class="flag-icon flag-icon-pl"></span>
+    </span>
+    <span ng-click="setTranslation('en')">
+        <span class="flag-icon flag-icon-us" ng-click="setTranslation('en')"></span>
+    </span>
 </span>
 
 <h3>{{ 'WALLET.TITLE' | translate }}</h3>
