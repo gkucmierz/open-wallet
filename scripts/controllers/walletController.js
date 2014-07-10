@@ -74,9 +74,17 @@ angular.module('walletApp')
 
     $scope.deleteRow = function(row) {
         var index = $scope.$storage.wallet.indexOf(row);
+        var reverse;
         if (index !== -1) {
             $scope.$storage.wallet.splice(index, 1);
+            
+            reverse = function() {
+                $scope.$storage.wallet.splice(index, 0, row);
+            };
+
+            $timeout(reverse, 1e3);
         }
+        return function(){};
     };
 
     $scope.checkBalances = function() {
