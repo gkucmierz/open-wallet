@@ -8,6 +8,7 @@
     "momentjs": "2.7.0",
     "lodash": "1.2.0",
     "ngstorage": "0.3.0",
-    "fontawesome": "~4.0.3"
+    "fontawesome": "~4.0.3",
+    "flag-icon-css": "0.6.3"
   }
 }
