@@ -1,7 +1,14 @@
 'use strict';
 
 angular.module('walletApp')
-.controller('WalletController', function($q, $scope, $timeout, $localStorage, BitcoinDataService) {
+.controller('WalletController', function(
+    $q,
+    $scope,
+    $timeout,
+    $localStorage,
+    BitcoinDataService,
+    BitcoreService
+) {
 
     $scope.$storage = $localStorage.$default({
         wallet: [
@@ -37,21 +44,31 @@ angular.module('walletApp')
         return false;
     };
 
+    var isValidAddress = function(address) {
+        var addr = new BitcoreService.Address(address);
+        return addr.isValid();
+    };
+
+
     $scope.addAddress = function() {
         var addressRow = findAddressRow($scope.address);
         var row;
-        if (!addressRow) {
+        if (!isValidAddress($scope.address)) {
+            // address is invalid
+            $scope.address = '';
+
+        } else if (!!addressRow) {
+            // address exists in wallet
+            addressRow.blink = true;
+            $timeout(function() {
+                delete addressRow.blink;
+            }, 0);
+        } else {
             row = {
                 address: $scope.address
             };
             $scope.$storage.wallet.push(row);
             updateAddressBalance(row);
-        } else {
-            // cannot add address
-            addressRow.blink = true;
-            $timeout(function() {
-                delete addressRow.blink;
-            }, 0);
         }
     };
 
