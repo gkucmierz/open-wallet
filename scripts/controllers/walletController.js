@@ -1,13 +1,33 @@
 'use strict';
 
 angular.module('walletApp')
-.controller('WalletController', function($scope, $timeout, $localStorage, BitcoinDataService) {
+.controller('WalletController', function($q, $scope, $timeout, $localStorage, BitcoinDataService) {
 
     $scope.$storage = $localStorage.$default({
         wallet: [
             {address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'}
         ]
     });
+
+    var updateAddressBalance = function(row) {
+        var deferred = $q.defer();
+        var maxAttemps = 3;
+
+        (function loop() {
+            BitcoinDataService.getBalance(row.address).then(function(data) {
+                _.extend(row, data);
+                deferred.resolve();
+            }, function() {
+                if (--maxAttemps > 0) {
+                    loop();
+                } else {
+                    deferred.resolve();
+                }
+            });
+        })();
+
+        return deferred.promise;
+    };
 
     var findAddressRow = function(address) {
         var wallet = $scope.$storage.wallet;
@@ -19,11 +39,15 @@ angular.module('walletApp')
 
     $scope.addAddress = function() {
         var addressRow = findAddressRow($scope.address);
+        var row;
         if (!addressRow) {
-            $scope.$storage.wallet.push({
+            row = {
                 address: $scope.address
-            });
+            };
+            $scope.$storage.wallet.push(row);
+            updateAddressBalance(row);
         } else {
+            // cannot add address
             addressRow.blink = true;
             $timeout(function() {
                 delete addressRow.blink;
@@ -45,14 +69,7 @@ angular.module('walletApp')
             var row = $scope.$storage.wallet[i++];
             if (i > $scope.$storage.wallet.length) return;
 
-            BitcoinDataService.getBalance(row.address)
-            .then(function(data) {
-                _.extend(row, data);
-                loop();
-            }, function() {
-                --i;
-                loop();
-            });
+            updateAddressBalance(row).then(loop);
         })();
     };
 
