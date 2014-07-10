@@ -2,8 +2,5 @@
 
 angular.module('walletApp')
 .service('BitcoreService', function() {
-    
-    return {
-
-    };
+    return require('bitcore');
 });
