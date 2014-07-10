@@ -10,6 +10,7 @@
 
     <!-- vendor -->
     <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendor/flag-icon-css/css/flag-icon.min.css">
 
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/ngstorage/ngStorage.min.js"></script>
@@ -37,9 +38,8 @@
 
 
 <span class="i18n">
-    <button ng-click="setTranslation('pl')">pl</button>
-    <button ng-click="setTranslation('en')">en</button>
-    {{ 'LANGUAGE' | translate }}
+    <span class="flag-icon flag-icon-pl" ng-click="setTranslation('pl')"></span>
+    <span class="flag-icon flag-icon-us" ng-click="setTranslation('en')"></span>
 </span>
 
 <h3>{{ 'WALLET.TITLE' | translate }}</h3>
