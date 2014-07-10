@@ -115,12 +115,17 @@ $walletRowHeight: 26px;
     right: 0;
     top: 0;
     background-color: #eee;
-    padding: 10px 15px;
     border-left: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
 
-    .flag-icon {
-        margin: 0 2px;
+    & > span {
+        display: inline-block;
+        padding: 10px;
         cursor: pointer;
+        @include build-prefix-values(transition, background-color 150ms ease);
+
+        &:hover {
+            background-color: #bbb;
+        }
     }
 }
