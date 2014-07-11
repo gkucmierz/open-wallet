@@ -18,12 +18,15 @@
             }
 
             a {
+                display: block;
                 text-decoration: none;
+                height: $undoDialogHeight;
                 line-height: $undoDialogHeight;
                 padding: 0 10px;
                 margin-right: $undoDialogHeight;
-
-                display: block;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
 
                 &:hover {
                     background-color: rgba(0,0,0,0.05);
