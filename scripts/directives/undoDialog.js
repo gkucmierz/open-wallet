@@ -6,7 +6,7 @@ angular.module('walletApp').directive('undoDialog', function (
 ) {
 
     return {
-        restrict: 'A',
+        restrict: 'C',
         templateUrl: PathGeneratorService.getDirective('undo-dialog'),
         scope: {},
         link: function(scope) {
