@@ -109,7 +109,7 @@ angular.module('walletApp')
         }, 0);
     };
 
-    $timeout(function() {
-        $scope.deleteRow($scope.$storage.wallet[0]);
-    }, 100);
+    // $timeout(function() {
+    //     $scope.deleteRow($scope.$storage.wallet[0]);
+    // }, 100);
 });
