@@ -1,4 +1,49 @@
 
 .undo-dialog {
-    color: #f00;
+    $undoDialogHeight: 40px;
+
+    width: 50%;
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+
+        li {
+            position: relative;
+            border: 1px #cba solid;
+            background: #fed;
+
+            & > * {
+                @include build-prefix-values(transition, background-color 150ms ease);
+            }
+
+            a {
+                text-decoration: none;
+                line-height: $undoDialogHeight;
+                padding: 0 10px;
+                margin-right: $undoDialogHeight;
+
+                display: block;
+
+                &:hover {
+                    background-color: rgba(0,0,0,0.05);
+                }
+            }
+
+            .close-dialog {
+                position: absolute;
+                right: 0;
+                top: 0;
+                line-height: $undoDialogHeight;
+                width: $undoDialogHeight;
+                text-align: center;
+                background: #fbb;
+                color: #b00;
+
+                &:hover {
+                    background-color: darken(#fbb, 10%);
+                }
+            }
+        }
+    }
 }
