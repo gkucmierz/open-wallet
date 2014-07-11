@@ -81,7 +81,8 @@ angular.module('walletApp')
 
         if (index !== -1) {
             $scope.$storage.wallet.splice(index, 1);
-            return reverse;
+            
+            $timeout(reverse, 1e3);
         }
 
         return UtilsService.noop;
