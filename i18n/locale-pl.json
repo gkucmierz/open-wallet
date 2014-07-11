@@ -12,5 +12,8 @@
         "ADD": {
             "PLACEHOLDER": "adres / klucz prywatny"
         }
+    },
+    "UNDO_MESSAGES": {
+        "DEFAULT": "Cofnij wykonaną czynność."
     }
 }

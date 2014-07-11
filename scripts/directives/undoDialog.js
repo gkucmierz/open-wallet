@@ -1,20 +1,28 @@
 'use strict';
 
 angular.module('walletApp').directive('undoDialog', function (
-    PathGeneratorService
+    PathGeneratorService,
+    UndoActionService
 ) {
+
     return {
         restrict: 'A',
         templateUrl: PathGeneratorService.getDirective('undo-dialog'),
         scope: {},
         link: function(scope) {
+            scope.undos = [];
 
-            scope.undos = [{
-                action: 'action'
-            }, {
-                action: 'action 2'
-            }];
+            scope.doUndo = function(undo) {
+                var index = scope.undos.indexOf(undo);
 
+                if (index !== -1) {
+                    scope.undos.splice(index, 1);
+
+                    undo.reverse();
+                }
+            };
+
+            UndoActionService.registerDialog(scope);
         }
     };
 });

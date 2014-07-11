@@ -1,6 +1,6 @@
 
 <ul ng-show=" undos.length > 0 ">
     <li ng-repeat=" undo in undos ">
-        {{ undo.action }}
+        <a href ng-click=" doUndo(undo) ">{{ undo.translationKey | translate }}</a>
     </li>
 </ul>
