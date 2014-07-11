@@ -1,8 +1,11 @@
 
 .undo-dialog {
+    $colorUndoDialog: #FFFEDE;
+    $colorCloseDialog: #fbb;
     $undoDialogHeight: 34px;
 
     width: 50%;
+    min-width: 500px;
 
     ul {
         list-style-type: none;
@@ -10,8 +13,8 @@
 
         li {
             position: relative;
-            border: 1px #cba solid;
-            background: #fed;
+            border: 1px darken($colorUndoDialog, 50%) solid;
+            background: $colorUndoDialog;
 
             & > * {
                 @include build-prefix-values(transition, background-color 150ms ease);
@@ -27,9 +30,16 @@
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
+                color: darken($colorUndoDialog, 80%);
 
                 &:hover {
-                    background-color: rgba(0,0,0,0.05);
+                    background-color: darken($colorUndoDialog, 10%);
+                }
+            }
+
+            &:hover {
+                .close-dialog {
+                    background-color: $colorCloseDialog;
                 }
             }
 
@@ -40,12 +50,12 @@
                 line-height: $undoDialogHeight;
                 width: $undoDialogHeight;
                 text-align: center;
-                background: #fbb;
-                color: #b00;
+                color: darken($colorCloseDialog, 40%);
                 cursor: pointer;
 
                 &:hover {
-                    background-color: darken(#fbb, 10%);
+                    background-color: darken($colorCloseDialog, 10%);
+                    color: #fff;
                 }
             }
         }
