@@ -1,0 +1,63 @@
+
+.undo-dialog {
+    $colorUndoDialog: #FFFEDE;
+    $colorCloseDialog: #fbb;
+    $undoDialogHeight: 34px;
+
+    width: 50%;
+    min-width: 500px;
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+
+        li {
+            position: relative;
+            border: 1px darken($colorUndoDialog, 50%) solid;
+            background: $colorUndoDialog;
+
+            & > * {
+                @include build-prefix-values(transition, background-color 150ms ease);
+            }
+
+            a {
+                display: block;
+                text-decoration: none;
+                height: $undoDialogHeight;
+                line-height: $undoDialogHeight;
+                padding: 0 10px;
+                margin-right: $undoDialogHeight;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                color: darken($colorUndoDialog, 80%);
+
+                &:hover {
+                    background-color: darken($colorUndoDialog, 10%);
+                }
+            }
+
+            &:hover {
+                .close-dialog {
+                    background-color: $colorCloseDialog;
+                }
+            }
+
+            .close-dialog {
+                position: absolute;
+                right: 0;
+                top: 0;
+                line-height: $undoDialogHeight;
+                width: $undoDialogHeight;
+                text-align: center;
+                color: darken($colorCloseDialog, 40%);
+                cursor: pointer;
+
+                &:hover {
+                    background-color: darken($colorCloseDialog, 10%);
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

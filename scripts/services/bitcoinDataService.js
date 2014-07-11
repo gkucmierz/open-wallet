@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('walletApp')
-.service('BitcoinDataService', function($http, $q) {
+angular.module('walletApp').service('BitcoinDataService', function(
+    $http,
+    $q
+) {
     
     var proxyUrl = function(url) {
         var proxy = 'http://www.corsproxy.com/';

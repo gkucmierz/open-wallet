@@ -1,6 +1,5 @@
 'use strict';
 
-angular.module('walletApp')
-.service('BitcoreService', function() {
+angular.module('walletApp').service('BitcoreService', function() {
     return require('bitcore');
 });
