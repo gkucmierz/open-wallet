@@ -1,2 +1,6 @@
 
-undo dialog :D
+<ul ng-show=" undos.length > 0 ">
+    <li ng-repeat=" undo in undos ">
+        {{ undo.action }}
+    </li>
+</ul>
