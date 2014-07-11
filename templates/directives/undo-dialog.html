@@ -2,6 +2,6 @@
 <ul ng-show=" undos.length > 0 ">
     <li ng-repeat=" undo in undos ">
         <a href ng-click=" doUndo(undo) ">{{ undo.translationKey | translate }}</a>
-        <span class="close-dialog">X</span>
+        <span ng-click=" removeUndo(undo) " class="close-dialog">X</span>
     </li>
 </ul>

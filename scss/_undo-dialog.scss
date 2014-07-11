@@ -39,6 +39,7 @@
                 text-align: center;
                 background: #fbb;
                 color: #b00;
+                cursor: pointer;
 
                 &:hover {
                     background-color: darken(#fbb, 10%);

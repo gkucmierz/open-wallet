@@ -5,6 +5,16 @@ angular.module('walletApp').directive('undoDialog', function (
     UndoActionService
 ) {
 
+    var removeUndo = function(undos, undo, callIt) {
+        var index = undos.indexOf(undo);
+
+        if (index !== -1) {
+            undos.splice(index, 1);
+
+            if (callIt) undo.reverse();
+        }
+    };
+
     return {
         restrict: 'C',
         templateUrl: PathGeneratorService.getDirective('undo-dialog'),
@@ -12,14 +22,12 @@ angular.module('walletApp').directive('undoDialog', function (
         link: function(scope) {
             scope.undos = [];
 
+            scope.removeUndo = function(undo) {
+                removeUndo(scope.undos, undo, false);
+            };
+
             scope.doUndo = function(undo) {
-                var index = scope.undos.indexOf(undo);
-
-                if (index !== -1) {
-                    scope.undos.splice(index, 1);
-
-                    undo.reverse();
-                }
+                removeUndo(scope.undos, undo, true);
             };
 
             UndoActionService.registerDialog(scope);
