@@ -14,6 +14,7 @@
         }
     },
     "UNDO_MESSAGES": {
-        "DEFAULT": "Undo your action."
+        "DEFAULT": "Undo your action",
+        "DELETE_WALLET_ENTRY": "Restore a deleted entry from the wallet"
     }
 }

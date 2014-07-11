@@ -24,7 +24,7 @@ angular.module('walletApp').service('UndoActionService', function(
                 undoObj = {
                     reverse: isResFunction ? res : res.reverse,
                     translationKey: getTranslationKey(
-                        isResFunction ? 'DEFAULT' : res.msgKey
+                        isResFunction ? 'DEFAULT' : res.translationKey
                     )
                 };
 

@@ -77,15 +77,16 @@ angular.module('walletApp')
     $scope.deleteRow = function(row) {
         UndoActionService.doAction(function() {
             var index = $scope.$storage.wallet.indexOf(row);
-            
-            var reverse = function() {
-                $scope.$storage.wallet.splice(index, 0, row);
-            };
 
             if (index === -1) return UtilsService.noop;
 
             $scope.$storage.wallet.splice(index, 1);
-            return reverse;
+            return {
+                reverse: function() {
+                    $scope.$storage.wallet.splice(index, 0, row);
+                },
+                translationKey: 'DELETE_WALLET_ENTRY'
+            };
         });
     };
 

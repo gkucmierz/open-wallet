@@ -14,6 +14,7 @@
         }
     },
     "UNDO_MESSAGES": {
-        "DEFAULT": "Cofnij wykonaną czynność."
+        "DEFAULT": "Cofnij wykonaną czynność",
+        "DELETE_WALLET_ENTRY": "Przywróć usunięty wpis z portfela"
     }
 }
