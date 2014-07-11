@@ -6,7 +6,7 @@ angular.module('walletApp').service('UndoActionService', function(
     var dialogScope;
 
     var getTranslationKey = function(undoName) {
-        return 'UNDO_MESSAGES.' + undoName;
+        return ['UNDO_DIALOG', 'MESSAGES', undoName].join('.');
     };
 
     return {

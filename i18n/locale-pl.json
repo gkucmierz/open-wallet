@@ -13,8 +13,11 @@
             "PLACEHOLDER": "adres / klucz prywatny"
         }
     },
-    "UNDO_MESSAGES": {
-        "DEFAULT": "Cofnij wykonaną czynność",
-        "DELETE_WALLET_ENTRY": "Przywróć usunięty wpis z portfela"
+    "UNDO_DIALOG": {
+        "CLOSE": "zamknij",
+        "MESSAGES": {
+            "DEFAULT": "Cofnij wykonaną czynność",
+            "DELETE_WALLET_ENTRY": "Przywróć usunięty wpis z portfela"
+        }
     }
 }
