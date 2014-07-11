@@ -20,7 +20,6 @@ angular.module('walletApp').service('UndoActionService', function(
             if (isDialogConnected) {
                 res = fn();
                 isResFunction = _.isFunction(res);
-                console.log(res);
 
                 undoObj = {
                     reverse: isResFunction ? res : res.reverse,
@@ -29,10 +28,7 @@ angular.module('walletApp').service('UndoActionService', function(
                     )
                 };
 
-                dialogScope.$apply(function() {
-                    dialogScope.undos.push(undoObj);
-                });
-
+                dialogScope.undos.push(undoObj);
             } else {
                 console.log('can`t run this action');
             }

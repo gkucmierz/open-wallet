@@ -8,7 +8,8 @@ angular.module('walletApp')
     $localStorage,
     BitcoinDataService,
     BitcoreService,
-    UtilsService
+    UtilsService,
+    UndoActionService
 ) {
 
     $scope.$storage = $localStorage.$default({
@@ -74,18 +75,18 @@ angular.module('walletApp')
     };
 
     $scope.deleteRow = function(row) {
-        var index = $scope.$storage.wallet.indexOf(row);
-        var reverse = function() {
-            $scope.$storage.wallet.splice(index, 0, row);
-        };
-
-        if (index !== -1) {
-            $scope.$storage.wallet.splice(index, 1);
+        UndoActionService.doAction(function() {
+            var index = $scope.$storage.wallet.indexOf(row);
             
-            $timeout(reverse, 1e3);
-        }
+            var reverse = function() {
+                $scope.$storage.wallet.splice(index, 0, row);
+            };
 
-        return UtilsService.noop;
+            if (index === -1) return UtilsService.noop;
+
+            $scope.$storage.wallet.splice(index, 1);
+            return reverse;
+        });
     };
 
     $scope.checkBalances = function() {
