@@ -1,0 +1,20 @@
+
+.i18n-dialog {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #eee;
+    border-left: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+
+    & > span {
+        display: inline-block;
+        padding: 10px;
+        cursor: pointer;
+        @include build-prefix-values(transition, background-color 150ms ease);
+
+        &:hover {
+            background-color: #bbb;
+        }
+    }
+}
