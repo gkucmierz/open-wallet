@@ -17,8 +17,6 @@
     <script src="vendor/angular-translate/angular-translate.js"></script>
     <script src="vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="vendor/bitcore/browser/bundle.js"></script>
-
-
     <script src="vendor/lodash/lodash.js"></script>
 
     <!-- app -->
@@ -34,6 +32,12 @@
     <!-- services -->
     <script src="scripts/services/bitcoinDataService.js"></script>
     <script src="scripts/services/bitcoreService.js"></script>
+    <script src="scripts/services/utilsService.js"></script>
+    <script src="scripts/services/pathGeneratorService.js"></script>
+    <script src="scripts/services/undoActionService.js"></script>
+
+    <!-- directives -->
+    <script src="scripts/directives/undoDialog.js"></script>
 
 </head>
 
@@ -47,6 +51,8 @@
         <span class="flag-icon flag-icon-us" ng-click="setTranslation('us')"></span>
     </span>
 </span>
+
+<div class="undo-dialog"></div>
 
 <h3>{{ 'WALLET.TITLE' | translate }}</h3>
 
