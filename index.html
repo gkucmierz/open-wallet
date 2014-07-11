@@ -38,19 +38,13 @@
 
     <!-- directives -->
     <script src="scripts/directives/undoDialog.js"></script>
+    <script src="scripts/directives/i18nDialog.js"></script>
 
 </head>
 
 <body ng-controller="MainController">
 
-<span class="i18n">
-    <span ng-click="setTranslation('pl')">
-        <span class="flag-icon flag-icon-pl"></span>
-    </span>
-    <span ng-click="setTranslation('us')">
-        <span class="flag-icon flag-icon-us" ng-click="setTranslation('us')"></span>
-    </span>
-</span>
+<div class="i18n-dialog"></div>
 
 <div class="undo-dialog"></div>
 
