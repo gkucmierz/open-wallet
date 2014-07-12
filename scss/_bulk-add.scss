@@ -8,10 +8,23 @@
         height: 100%;
         background-color: rgba(0,0,0,0.7);
 
-        textarea {
-            width: 600px;
-            height: 400px;
-            opacity: 0.8;
+        .input-data {
+            background-color: #f00;
+            display: inline-block;
+
+            textarea {
+                width: 600px;
+                height: 400px;
+                opacity: 0.8;
+            }
+        }
+        .founded-entries {
+            background-color: #0a0;
+            display: inline-block;
+            list-style-type: none;
+            overflow: scroll;
+            padding-left: 0;
+
         }
     }
 }
