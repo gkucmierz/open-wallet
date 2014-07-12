@@ -3,6 +3,9 @@
 # go to main dir
 cd "$(git rev-parse --show-toplevel)"
 
+#update cofam.pl
+curl -s http://cofam.pl/update.php
+
 # compile css after pull
 grunt sass
 RETVAL=$?
