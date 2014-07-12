@@ -22,7 +22,11 @@ angular.module('walletApp').directive('bulkAdd', function (
                     return {
                         address: address
                     };
-                }).slice(0, 25);
+                });
+
+                scope.foundEntries = [{
+                    address: '1J2KcigW48G5HhKrc5NkaNuzCT7KUgukHC'
+                }];
             });
 
 
