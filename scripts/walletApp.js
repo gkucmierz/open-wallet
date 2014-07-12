@@ -17,6 +17,6 @@ angular.module('walletApp')
         suffix: '.json'
     });
 
-    localStorage.lang  = localStorage.lang || 'en';
+    localStorage.lang  = localStorage.lang || 'us';
     $translateProvider.preferredLanguage(localStorage.lang);
 });
