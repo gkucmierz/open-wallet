@@ -10,6 +10,7 @@
     "ngstorage": "0.3.0",
     "fontawesome": "~4.0.3",
     "flag-icon-css": "0.6.3",
-    "bitcore": "0.1.19"
+    "bitcore": "0.1.19",
+    "normalize-css": "3.0.1"
   }
 }
