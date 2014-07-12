@@ -39,6 +39,7 @@
     <!-- directives -->
     <script src="scripts/directives/undoDialog.js"></script>
     <script src="scripts/directives/i18nDialog.js"></script>
+    <script src="scripts/directives/bulk-add.js"></script>
 
 </head>
 
@@ -107,7 +108,7 @@
     <input type="text" ng-model="address" placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}" />
     <input type="button" ng-click="addAddress()" value="+" />
 
-    <span ng-include=" PathGeneratorService.getView('wallet', 'bulk-add') "></span>
+    <span class="bulk-add"></span>
 
 </div>
 
