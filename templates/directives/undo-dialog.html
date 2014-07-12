@@ -1,11 +1,14 @@
 
 <ul ng-show=" undos.length > 0 ">
     <li ng-repeat=" undo in undos ">
+        
         <a href ng-click=" doUndo(undo) " title="{{ undo.translationKey | translate }}">
             {{ undo.translationKey | translate }}
         </a>
+
         <span ng-click=" removeUndo(undo) " class="close-dialog" title="{{ 'UNDO_DIALOG.CLOSE' | translate }}">
             <i class="fa fa-times"></i>
         </span>
+        
     </li>
 </ul>

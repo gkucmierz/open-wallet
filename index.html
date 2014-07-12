@@ -107,12 +107,7 @@
     <input type="text" ng-model="address" placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}" />
     <input type="button" ng-click="addAddress()" value="+" />
 
-    <input type="button" ng-click=" bulkAdding = true " value="…" />
-    <div class="bulk-add-view" ng-show=" bulkAdding ">
-        <textarea></textarea>
-        <input type="button" value="add all" />
-    </div>
-
+    <span ng-include=" PathGeneratorService.getView('wallet', 'bulk-add') "></span>
 
 </div>
 

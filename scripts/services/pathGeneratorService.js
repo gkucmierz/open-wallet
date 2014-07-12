@@ -11,6 +11,9 @@ angular.module('walletApp').service('PathGeneratorService', function() {
     return {
         getDirective: function(name) {
             return path(templatesUrl, 'directives', name + templatesExtension);
+        },
+        getView: function(page, view) {
+            return path(templatesUrl, page, view + templatesExtension);
         }
     };
 });

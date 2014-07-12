@@ -1,0 +1,11 @@
+
+<input type="button" ng-click=" bulkAdding = true " value="…" />
+
+<div class="bulk-add-view" ng-show=" bulkAdding ">
+    <textarea></textarea>
+    <input type="button" value="add to wallet" />
+
+    <span ng-click=" bulkAdding = false " title="close dialog">
+        <i class="fa fa-times"></i>
+    </span>
+</div>
