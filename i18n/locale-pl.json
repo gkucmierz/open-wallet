@@ -10,7 +10,8 @@
             "DELETE": "usuń"
         },
         "ADD": {
-            "PLACEHOLDER": "adres / klucz prywatny"
+            "PLACEHOLDER": "adres / klucz prywatny",
+            "WRONGADDRESS": "Nieprawidłowy adres/klucz"
         }
     },
     "UNDO_DIALOG": {
