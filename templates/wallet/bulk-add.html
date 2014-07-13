@@ -13,8 +13,8 @@
                 <li ng-repeat=" entry in foundEntries ">{{ entry.address }}</li>
             </ul>
             <div class="buttons">
-                <input type="button" value="cancel" ng-click=" inputText = ''; adding = false " />
-                <input type="button" value="add addresses" />
+                <input type="button" value="cancel" ng-click=" cancel() " />
+                <input type="button" value="add addresses" ng-click=" add() " />
             </div>
         </div>
     </div>

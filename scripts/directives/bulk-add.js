@@ -16,10 +16,22 @@ angular.module('walletApp').directive('bulkAdd', function (
     return {
         restrict: 'C',
         templateUrl: PathGeneratorService.getView('wallet', 'bulk-add'),
-        scope: {},
+        scope: {
+            addCallback: '='
+        },
         link: function(scope) {
             scope.foundEntries = [];
             scope.inputText = '';
+
+            scope.cancel = function() {
+                scope.inputText = '';
+                scope.adding = false;
+            };
+
+            scope.add = function() {
+                scope.addCallback(scope.foundEntries);
+                scope.adding = false;
+            };
 
             scope.$watch('inputText', function(inputText) {
                 var uniquePotentialAddresses = _.unique(inputText.match(bitcoinAddressRegExp));
@@ -34,8 +46,6 @@ angular.module('walletApp').directive('bulkAdd', function (
                     return isValidAddress(entry.address);
                 });
             });
-
-            scope.adding = true;
 
         }
     };
