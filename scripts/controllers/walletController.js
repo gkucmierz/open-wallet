@@ -51,14 +51,16 @@ angular.module('walletApp')
         return addr.isValid();
     };
 
-
-    $scope.addAddress = function() {
+    $scope.AddAdressSubmit = function() {
         var addressRow = findAddressRow($scope.address);
         var row;
+        $scope.AddressForm.address.$setValidity('correct', true);
         if (!isValidAddress($scope.address)) {
-            // address is invalid
-            $scope.address = '';
-
+            $scope.AddressForm.address.$setValidity('correct', false);
+            $timeout(function() {
+                $scope.AddressForm.address.$setValidity('correct', true);
+            }, 2000);
+            //$scope.address = 'dsf';
         } else if (!!addressRow) {
             // address exists in wallet
             addressRow.blink = true;

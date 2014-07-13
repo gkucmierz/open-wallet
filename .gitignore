@@ -1,6 +1,8 @@
 .DS_Store
 Thumbs.db
 
+*.php
+
 .sass-cache
 *.css.map
 *.css
