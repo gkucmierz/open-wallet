@@ -60,7 +60,6 @@ angular.module('walletApp')
             $timeout(function() {
                 $scope.AddressForm.address.$setValidity('correct', true);
             }, 2000);
-            //$scope.address = 'dsf';
         } else if (!!addressRow) {
             // address exists in wallet
             addressRow.blink = true;
