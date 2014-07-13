@@ -11,6 +11,9 @@
         },
         "ADD": {
             "PLACEHOLDER": "address / privkey"
+        },
+        "SORT": {
+            "BY_BALANCE": "sort by balance"
         }
     },
     "UNDO_DIALOG": {

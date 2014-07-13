@@ -11,6 +11,9 @@
         },
         "ADD": {
             "PLACEHOLDER": "adres / klucz prywatny"
+        },
+        "SORT": {
+            "BY_BALANCE": "sortuj według stanu kont"
         }
     },
     "UNDO_DIALOG": {
