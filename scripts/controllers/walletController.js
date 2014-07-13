@@ -51,6 +51,15 @@ angular.module('walletApp')
         return addr.isValid();
     };
 
+    $scope.sortByBalance = function() {
+        $scope.$storage.wallet = $scope.$storage.wallet.sort(function(rowA, rowB) {
+            var balance = {
+                a: rowA.balance || 0,
+                b: rowB.balance || 0
+            };
+            return balance.b - balance.a;
+        });
+    };
 
     $scope.addAddress = function() {
         var addressRow = findAddressRow($scope.address);
