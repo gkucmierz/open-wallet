@@ -24,9 +24,9 @@ angular.module('walletApp').directive('bulkAdd', function (
                     };
                 });
 
-                scope.foundEntries = [{
-                    address: '1J2KcigW48G5HhKrc5NkaNuzCT7KUgukHC'
-                }];
+                // scope.foundEntries = [{
+                //     address: '1J2KcigW48G5HhKrc5NkaNuzCT7KUgukHC'
+                // }];
             });
 
 

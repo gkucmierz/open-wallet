@@ -3,14 +3,21 @@
 
 <div class="bulk-add-view" ng-show=" adding ">
 
-    <div class="input-data">
-        <textarea ng-model="inputText"></textarea>
-        <input type="button" value="add to wallet" />
-    </div>
+    <div class="view-container">
+        <div class="input-data">
+            <textarea ng-model="inputText" placeholder="Put data here"></textarea>
+        </div>
 
-    <ul class="founded-entries">
-        <li ng-repeat=" entry in foundEntries ">{{ entry.address }}</li>
-    </ul>
+        <div class="founded-entries">
+            <ul>
+                <li ng-repeat=" entry in foundEntries ">{{ entry.address }}</li>
+            </ul>
+            <div class="buttons">
+                <input type="button" value="cancel" ng-click=" inputText = ''; adding = false " />
+                <input type="button" value="add addresses" />
+            </div>
+        </div>
+    </div>
 
     <span class="close-button" ng-click=" adding = false " title="close dialog">
         <i class="fa fa-times"></i>
