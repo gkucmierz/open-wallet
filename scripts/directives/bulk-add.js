@@ -30,7 +30,7 @@ angular.module('walletApp').directive('bulkAdd', function (
 
             scope.add = function() {
                 scope.addCallback(scope.foundEntries);
-                scope.adding = false;
+                scope.cancel();
             };
 
             scope.$watch('inputText', function(inputText) {
