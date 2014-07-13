@@ -51,7 +51,7 @@
 <h3>{{ 'WALLET.TITLE' | translate }}</h3>
 
 <div ng-controller="WalletController">
-    <input type="button" ng-click="checkBalances()" value="&#8634;" />
+    <input type="button" ng-click="checkBalances()"  id="checkButton" value="&#8634;" />
 
     <div class="wallet-header">
         <span class="address">
@@ -103,9 +103,11 @@
     </ul>
 
     <br/>
-
-    <input type="text" ng-model="address" placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}" />
-    <input type="button" ng-click="addAddress()" value="+" />
+    <form name="AddressForm" ng-submit="AddAdressSubmit()" class="AddressForm">
+        <input type="text" name="address" ng-model="address" placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}" required/>
+        <input type="submit" value="+" />
+        <span class="error" ng-show="AddressForm.address.$error.correct">{{ 'WALLET.ADD.WRONGADDRESS' | translate }}</span><br>
+    </form>
 </div>
 
 </body>

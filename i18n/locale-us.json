@@ -10,7 +10,8 @@
             "DELETE": "delete"
         },
         "ADD": {
-            "PLACEHOLDER": "address / privkey"
+            "PLACEHOLDER": "address / privkey",
+            "WRONGADDRESS": "Incorrect address/privkey"
         }
     },
     "UNDO_DIALOG": {
