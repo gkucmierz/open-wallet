@@ -11,6 +11,13 @@
         },
         "ADD": {
             "PLACEHOLDER": "adres / klucz prywatny"
+        },
+        "BULK_ADD": {
+            "ADD_BUTTON": "…",
+            "INPUT_PLACEHOLDER": "umieść dane tutaj",
+            "CANCEL_BUTTON": "anuluj",
+            "CONFIRM_BUTTON": "dodaj adresy",
+            "CLOSE_DIALOG": "zamknij"
         }
     },
     "UNDO_DIALOG": {

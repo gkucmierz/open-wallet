@@ -11,6 +11,13 @@
         },
         "ADD": {
             "PLACEHOLDER": "address / privkey"
+        },
+        "BULK_ADD": {
+            "ADD_BUTTON": "…",
+            "INPUT_PLACEHOLDER": "put data here",
+            "CANCEL_BUTTON": "cancel",
+            "CONFIRM_BUTTON": "add addresses",
+            "CLOSE_DIALOG": "close"
         }
     },
     "UNDO_DIALOG": {

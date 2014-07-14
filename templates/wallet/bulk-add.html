@@ -1,0 +1,25 @@
+
+<input type="button" ng-click=" adding = true " value="{{ 'WALLET.BULK_ADD.ADD_BUTTON' | translate }}" />
+
+<div class="bulk-add-view" ng-show=" adding ">
+
+    <div class="view-container">
+        <div class="input-data">
+            <textarea ng-model="inputText" placeholder="{{ 'WALLET.BULK_ADD.INPUT_PLACEHOLDER' | translate }}"></textarea>
+        </div>
+
+        <div class="founded-entries">
+            <ul>
+                <li ng-repeat=" entry in foundEntries ">{{ entry.address }}</li>
+            </ul>
+            <div class="buttons">
+                <input type="button" value="{{ 'WALLET.BULK_ADD.CANCEL_BUTTON' | translate }}" ng-click=" cancel() " />
+                <input type="button" value="{{ 'WALLET.BULK_ADD.CONFIRM_BUTTON' | translate }}" ng-click=" add() " />
+            </div>
+        </div>
+    </div>
+
+    <span class="close-button" ng-click=" adding = false " title="{{ 'WALLET.BULK_ADD.CLOSE_DIALOG' | translate }}">
+        <i class="fa fa-times"></i>
+    </span>
+</div>

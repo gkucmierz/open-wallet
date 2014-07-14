@@ -51,6 +51,12 @@ angular.module('walletApp')
         return addr.isValid();
     };
 
+    $scope.addAddresses = function(addresses) {
+        _.map(addresses, function(row) {
+            $scope.$storage.wallet.push(row);
+            updateAddressBalance(row);
+        });
+    };
 
     $scope.addAddress = function() {
         var addressRow = findAddressRow($scope.address);
