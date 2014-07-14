@@ -8,10 +8,12 @@
     <meta name="author" content="">
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- vendor -->
+    <!-- vendor css -->
+    <link rel="stylesheet" href="vendor/normalize-css/normalize.css">
     <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="vendor/flag-icon-css/css/flag-icon.min.css">
 
+    <!-- vendor js -->
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/ngstorage/ngStorage.min.js"></script>
     <script src="vendor/angular-translate/angular-translate.js"></script>
@@ -39,6 +41,7 @@
     <!-- directives -->
     <script src="scripts/directives/undoDialog.js"></script>
     <script src="scripts/directives/i18nDialog.js"></script>
+    <script src="scripts/directives/bulk-add.js"></script>
 
 </head>
 
@@ -108,6 +111,9 @@
 
     <input type="text" ng-model="address" placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}" />
     <input type="button" ng-click="addAddress()" value="+" />
+
+    <span class="bulk-add" add-callback="addAddresses"></span>
+
 </div>
 
 </body>

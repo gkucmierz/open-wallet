@@ -14,6 +14,13 @@
         },
         "SORT": {
             "BY_BALANCE": "sort by balance"
+        },
+        "BULK_ADD": {
+            "ADD_BUTTON": "…",
+            "INPUT_PLACEHOLDER": "put data here",
+            "CANCEL_BUTTON": "cancel",
+            "CONFIRM_BUTTON": "add addresses",
+            "CLOSE_DIALOG": "close"
         }
     },
     "UNDO_DIALOG": {
