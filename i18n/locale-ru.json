@@ -1,0 +1,23 @@
+{
+    "WALLET": {
+        "TITLE": "Ваш кашелек",
+        "TABLE_HEADER": {
+            "ADDRESS": "Адрес",
+            "RECEIVED": "Получено",
+            "BALANCE": "Баланс"
+        },
+        "TABLE_ENTRIES": {
+            "DELETE": "Удалить"
+        },
+        "ADD": {
+            "PLACEHOLDER": "Адрес / приватный ключ"
+        }
+    },
+    "UNDO_DIALOG": {
+        "CLOSE": "Закрыть",
+        "MESSAGES": {
+            "DEFAULT": "Отмена",
+            "DELETE_WALLET_ENTRY": "Восстановить удаленную запись из кошелька"
+        }
+    }
+}
