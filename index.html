@@ -102,6 +102,10 @@
             <span class="trash" ng-click="deleteRow(row)" title="{{ 'WALLET.TABLE_ENTRIES.DELETE' | translate }}">
                 <i class="fa fa-trash-o"></i>
             </span>
+
+            <span ng-show=" row.loading " class="loading">
+                <i class="fa fa-spinner fa-spin"></i>
+            </span>
         </li>
     </ul>
 

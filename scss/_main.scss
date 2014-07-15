@@ -108,5 +108,12 @@ $walletRowHeight: 26px;
                 color: #f00;
             }
         }
+
+        .loading {
+            color: #060;
+            position: absolute;
+            right: -20px;
+            top: 0;
+        }
     }
 }
