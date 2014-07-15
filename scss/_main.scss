@@ -4,18 +4,18 @@
     font-family: "Times New Roman",Georgia,Serif;
 }
 
-$walletWidth: 600px;
+$walletWidth: 680px;
 $walletRowHeight: 26px;
 
 @mixin walletWidths() {
     .address {
         display: inline-block;
-        width: 340px;
+        width: 360px;
     }
     .received,
     .balance {
         display: inline-block;
-        width: 100px;
+        width: 130px;
     }
 
     & > span {
