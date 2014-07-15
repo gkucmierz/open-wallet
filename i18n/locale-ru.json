@@ -11,6 +11,16 @@
         },
         "ADD": {
             "PLACEHOLDER": "Адрес / приватный ключ"
+        },
+        "SORT": {
+            "BY_BALANCE": "---- -- -------"
+        },
+        "BULK_ADD": {
+            "ADD_BUTTON": "…",
+            "INPUT_PLACEHOLDER": "--- ---- ----",
+            "CANCEL_BUTTON": "------",
+            "CONFIRM_BUTTON": "--- -------",
+            "CLOSE_DIALOG": "-----"
         }
     },
     "UNDO_DIALOG": {

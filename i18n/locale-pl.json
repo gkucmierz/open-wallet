@@ -12,6 +12,9 @@
         "ADD": {
             "PLACEHOLDER": "adres / klucz prywatny"
         },
+        "SORT": {
+            "BY_BALANCE": "sortuj według stanu kont"
+        },
         "BULK_ADD": {
             "ADD_BUTTON": "…",
             "INPUT_PLACEHOLDER": "umieść dane tutaj",

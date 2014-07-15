@@ -56,6 +56,8 @@
 <div ng-controller="WalletController">
     <input type="button" ng-click="checkBalances()" value="&#8634;" />
 
+    <a href ng-click=" sortByBalance() ">{{ 'WALLET.SORT.BY_BALANCE' | translate }}</a>
+
     <div class="wallet-header">
         <span class="address">
             {{ 'WALLET.TABLE_HEADER.ADDRESS' | translate }}

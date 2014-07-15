@@ -12,6 +12,9 @@
         "ADD": {
             "PLACEHOLDER": "address / privkey"
         },
+        "SORT": {
+            "BY_BALANCE": "sort by balance"
+        },
         "BULK_ADD": {
             "ADD_BUTTON": "…",
             "INPUT_PLACEHOLDER": "put data here",
