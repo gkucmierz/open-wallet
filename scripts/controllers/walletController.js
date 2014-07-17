@@ -22,14 +22,22 @@ angular.module('walletApp')
         var deferred = $q.defer();
         var maxAttemps = 3;
 
+        row.loading = true;
+
+        var stopLoading = function() {
+            delete row.loading;
+        };
+
         (function loop() {
             BitcoinDataService.getBalance(row.address).then(function(data) {
                 _.extend(row, data);
+                stopLoading();
                 deferred.resolve();
             }, function() {
                 if (--maxAttemps > 0) {
                     loop();
                 } else {
+                    stopLoading();
                     deferred.resolve();
                 }
             });
