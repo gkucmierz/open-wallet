@@ -9,14 +9,12 @@ angular.module('walletApp')
     BitcoinDataService,
     BitcoreService,
     UtilsService,
-    UndoActionService
+    UndoActionService,
+    WalletDataService
 ) {
 
-    $scope.$storage = $localStorage.$default({
-        wallet: [
-            {address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'}
-        ]
-    });
+    $scope.wallet = WalletDataService.data;
+    
 
     var updateAddressBalance = function(row) {
         var deferred = $q.defer();
@@ -47,7 +45,7 @@ angular.module('walletApp')
     };
 
     var findAddressRow = function(address) {
-        var wallet = $scope.$storage.wallet;
+        var wallet = $scope.wallet;
         for (var i = 0, l = wallet.length; i < l; ++i) {
             if (wallet[i].address === address) return wallet[i];
         }
@@ -60,7 +58,7 @@ angular.module('walletApp')
     };
 
     $scope.sortByBalance = function() {
-        $scope.$storage.wallet = $scope.$storage.wallet.sort(function(rowA, rowB) {
+        $scope.wallet = $scope.wallet.sort(function(rowA, rowB) {
             var balance = {
                 a: rowA.balance || 0,
                 b: rowB.balance || 0
@@ -71,7 +69,7 @@ angular.module('walletApp')
 
     $scope.addAddresses = function(addresses) {
         _.map(addresses, function(row) {
-            $scope.$storage.wallet.push(row);
+            $scope.wallet.push(row);
             updateAddressBalance(row);
         });
     };
@@ -93,20 +91,20 @@ angular.module('walletApp')
             row = {
                 address: $scope.address
             };
-            $scope.$storage.wallet.push(row);
+            $scope.wallet.push(row);
             updateAddressBalance(row);
         }
     };
 
     $scope.deleteRow = function(row) {
-        var index = $scope.$storage.wallet.indexOf(row);
+        var index = $scope.wallet.indexOf(row);
         if (index === -1) return UtilsService.noop;
 
         UndoActionService.doAction(function() {
-            $scope.$storage.wallet.splice(index, 1);
+            $scope.wallet.splice(index, 1);
             return {
                 reverse: function() {
-                    $scope.$storage.wallet.splice(index, 0, row);
+                    $scope.wallet.splice(index, 0, row);
                 },
                 translationKey: 'DELETE_WALLET_ENTRY'
             };
@@ -117,8 +115,8 @@ angular.module('walletApp')
         var i = 0;
 
         (function loop() {
-            var row = $scope.$storage.wallet[i++];
-            if (i > $scope.$storage.wallet.length) return;
+            var row = $scope.wallet[i++];
+            if (i > $scope.wallet.length) return;
 
             updateAddressBalance(row).then(loop);
         })();
@@ -126,7 +124,7 @@ angular.module('walletApp')
 
     $scope.sumBalances = function(type) {
         type = type || 'balance';
-        return _.reduce($scope.$storage.wallet, function(sum, row) {
+        return _.reduce($scope.wallet, function(sum, row) {
             var val = row[type]+0 ? row[type] : 0;
             return sum + val;
         }, 0);
