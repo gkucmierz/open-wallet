@@ -8,7 +8,6 @@ angular.module('walletApp')
     $localStorage,
     BitcoinDataService,
     BitcoreService,
-    UndoActionService,
     WalletDataService
 ) {
 
@@ -43,19 +42,6 @@ angular.module('walletApp')
         return deferred.promise;
     };
 
-    var findAddressRow = function(address) {
-        var wallet = $scope.wallet;
-        for (var i = 0, l = wallet.length; i < l; ++i) {
-            if (wallet[i].address === address) return wallet[i];
-        }
-        return false;
-    };
-
-    var isValidAddress = function(address) {
-        var addr = new BitcoreService.Address(address);
-        return addr.isValid();
-    };
-
     $scope.sortByBalance = function() {
         $scope.wallet = $scope.wallet.sort(function(rowA, rowB) {
             var balance = {
@@ -76,26 +62,7 @@ angular.module('walletApp')
     };
 
     $scope.addAddress = function() {
-        var addressRow = findAddressRow($scope.address);
-        var row;
-        if (!isValidAddress($scope.address)) {
-            // address is invalid
-            $scope.address = '';
-
-        } else if (!!addressRow) {
-            // address exists in wallet
-            addressRow.blink = true;
-            $timeout(function() {
-                delete addressRow.blink;
-            }, 0);
-        } else {
-            row = {
-                address: $scope.address
-            };
-            $scope.wallet.push(row);
-            updateAddressBalance(row);
-            WalletDataService.save();
-        }
+        WalletDataService.addAddress($scope.address);
     };
 
     $scope.deleteRow = function(row) {
