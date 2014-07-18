@@ -14,7 +14,9 @@ angular.module('walletApp')
 ) {
 
     $scope.wallet = WalletDataService.data;
-    
+
+    WalletDataService.save();
+
 
     var updateAddressBalance = function(row) {
         var deferred = $q.defer();
