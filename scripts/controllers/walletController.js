@@ -70,14 +70,7 @@ angular.module('walletApp')
     };
 
     $scope.checkBalances = function() {
-        var i = 0;
-
-        (function loop() {
-            var row = $scope.wallet[i++];
-            if (i > $scope.wallet.length) return;
-
-            updateAddressBalance(row).then(loop);
-        })();
+        WalletDataService.checkBalances();
     };
 
     $scope.sumBalances = function(type) {

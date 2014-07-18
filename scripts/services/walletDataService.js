@@ -135,6 +135,16 @@ angular.module('walletApp').service('WalletDataService', function(
 
             return true;
         },
+        checkBalances: function() {
+            var i = 0;
+
+            (function loop() {
+                var row = data[i++];
+                if (i > data.length) return;
+
+                updateAddressBalance(row).then(loop);
+            })();
+        },
         save: function() {
             StorageService.set(storageKey, compress(data));
         },
