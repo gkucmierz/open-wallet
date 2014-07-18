@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('walletApp').service('WalletDataService', function(
-    StorageService
+    StorageService,
+    UtilsService,
+    UndoActionService
 ) {
     var storageKey = 'wallet';
     var data;
@@ -43,9 +45,25 @@ angular.module('walletApp').service('WalletDataService', function(
                 return sum + val;
             }, 0);
         },
+        deleteRow: function(row) {
+            var _this = this;
+            var index = data.indexOf(row);
+            if (index === -1) return UtilsService.noop;
+
+            UndoActionService.doAction(function() {
+                data.splice(index, 1);
+                _this.save();
+                return {
+                    reverse: function() {
+                        data.splice(index, 0, row);
+                        _this.save();
+                    },
+                    translationKey: 'DELETE_WALLET_ENTRY'
+                };
+            });
+        },
         save: function() {
             StorageService.set(storageKey, compress(data));
-            console.log(compress(data));
         },
         data: data
     };
