@@ -29,7 +29,10 @@ angular.module('walletApp').directive('bulkAdd', function (
             };
 
             scope.add = function() {
-                scope.addCallback(scope.foundEntries);
+                var fetchedAddresses = _.map(scope.foundEntries, function(row) {
+                    return row.address;
+                });
+                scope.addCallback(fetchedAddresses);
                 scope.cancel();
             };
 

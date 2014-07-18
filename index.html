@@ -37,6 +37,8 @@
     <script src="scripts/services/utilsService.js"></script>
     <script src="scripts/services/pathGeneratorService.js"></script>
     <script src="scripts/services/undoActionService.js"></script>
+    <script src="scripts/services/walletDataService.js"></script>
+    <script src="scripts/services/storageService.js"></script>
 
     <!-- directives -->
     <script src="scripts/directives/undoDialog.js"></script>
@@ -82,7 +84,7 @@
         </span>
     </div>
     <ul class="wallet-list">
-        <li ng-repeat=" row in $storage.wallet " ng-class="{ blink: row.blink }">
+        <li ng-repeat=" row in wallet " ng-class="{ blink: row.blink }">
             <span class="address">
                 {{ row.address }}
             </span>
