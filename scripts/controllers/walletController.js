@@ -28,6 +28,7 @@ angular.module('walletApp')
         (function loop() {
             BitcoinDataService.getBalance(row.address).then(function(data) {
                 _.extend(row, data);
+                WalletDataService.save();
                 stopLoading();
                 deferred.resolve();
             }, function() {
@@ -121,16 +122,11 @@ angular.module('walletApp')
             if (i > $scope.wallet.length) return;
 
             updateAddressBalance(row).then(loop);
-            WalletDataService.save();
         })();
     };
 
     $scope.sumBalances = function(type) {
-        type = type || 'balance';
-        return _.reduce($scope.wallet, function(sum, row) {
-            var val = row[type]+0 ? row[type] : 0;
-            return sum + val;
-        }, 0);
+        return WalletDataService.getSum(type);
     };
 
 });

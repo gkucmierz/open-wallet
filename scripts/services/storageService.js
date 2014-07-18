@@ -10,13 +10,13 @@ angular.module('walletApp').service('StorageService', function() {
     return {
         get: function(key) {
             var res = localStorage[getKey(key)];
-            return typeof res === 'undefined' ? res : angular.fromJson(res);
+            return _.isUndefined(res) ? res : angular.fromJson(res);
         },
         set: function(key, value) {
             localStorage[getKey(key)] = angular.toJson(value);
         },
         default: function(key, value) {
-            if (typeof this.get(key) === 'undefined') {
+            if (_.isUndefined(this.get(key))) {
                 this.set(key, value);
             }
             return this.get(key);
