@@ -4,7 +4,10 @@ angular.module('walletApp').service('WalletDataService', function(
     StorageService
 ) {
     var storageKey = 'wallet';
-    var data = StorageService.default(storageKey, [
+    var data;
+
+
+    data = StorageService.default(storageKey, [
         {address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'}
     ]);
 

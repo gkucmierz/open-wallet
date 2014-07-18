@@ -64,6 +64,7 @@ angular.module('walletApp')
             };
             return balance.b - balance.a;
         });
+        WalletDataService.save();
     };
 
     $scope.addAddresses = function(addresses) {
@@ -71,6 +72,7 @@ angular.module('walletApp')
             $scope.wallet.push(row);
             updateAddressBalance(row);
         });
+        WalletDataService.save();
     };
 
     $scope.addAddress = function() {
@@ -92,6 +94,7 @@ angular.module('walletApp')
             };
             $scope.wallet.push(row);
             updateAddressBalance(row);
+            WalletDataService.save();
         }
     };
 
@@ -118,6 +121,7 @@ angular.module('walletApp')
             if (i > $scope.wallet.length) return;
 
             updateAddressBalance(row).then(loop);
+            WalletDataService.save();
         })();
     };
 
