@@ -70,7 +70,7 @@
                 {{ 'WALLET.TABLE_HEADER.RECEIVED' | translate }} <i class="fa fa-btc"></i>
             </span>
             <span class="sum">
-                {{ sumBalances('received') * 1e-8 | btc }}
+                {{ sumBalances('received') | btc }}
             </span>
         </span>
 
@@ -79,7 +79,7 @@
                 {{ 'WALLET.TABLE_HEADER.BALANCE' | translate }} <i class="fa fa-btc"></i>
             </span>
             <span class="sum">
-                {{ sumBalances() * 1e-8 | btc }}
+                {{ sumBalances() | btc }}
             </span>
         </span>
     </div>
