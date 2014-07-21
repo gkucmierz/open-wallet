@@ -13,14 +13,14 @@
             "PLACEHOLDER": "Адрес / приватный ключ"
         },
         "SORT": {
-            "BY_BALANCE": "---- -- -------"
+            "BY_BALANCE": "сортировать по балансу счета"
         },
         "BULK_ADD": {
             "ADD_BUTTON": "…",
-            "INPUT_PLACEHOLDER": "--- ---- ----",
-            "CANCEL_BUTTON": "------",
-            "CONFIRM_BUTTON": "--- ---------",
-            "CLOSE_DIALOG": "-----"
+            "INPUT_PLACEHOLDER": "Введите данные здесь",
+            "CANCEL_BUTTON": "Отмена",
+            "CONFIRM_BUTTON": "добавить адреса",
+            "CLOSE_DIALOG": "Закрыть"
         }
     },
     "UNDO_DIALOG": {
