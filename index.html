@@ -103,8 +103,14 @@
                 {{ row.balance | btc }}
             </span>
 
-            <span class="trash" ng-click="deleteRow(row)" title="{{ 'WALLET.TABLE_ENTRIES.DELETE' | translate }}">
-                <i class="fa fa-trash-o"></i>
+            <span class="icons">                
+                <span class="type">
+                    <i class="fa fa-eye"></i>
+                </span>
+
+                <span class="trash" ng-click="deleteRow(row)" title="{{ 'WALLET.TABLE_ENTRIES.DELETE' | translate }}">
+                    <i class="fa fa-trash-o"></i>
+                </span>
             </span>
 
             <span ng-show=" row.loading " class="loading">

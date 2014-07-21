@@ -4,7 +4,7 @@
     font-family: "Times New Roman",Georgia,Serif;
 }
 
-$walletWidth: 680px;
+$walletWidth: 690px;
 $walletRowHeight: 26px;
 
 @mixin walletWidths() {
@@ -97,10 +97,17 @@ $walletRowHeight: 26px;
             }
         }
 
-        .trash {
+        .icons {
             position: absolute;
             right: 0;
-            padding: 0 8px;
+
+            & > span {
+                padding: 0 4px;
+                display: inline-block;
+            }
+        }
+
+        .trash {
             cursor: pointer;
 
             &:hover {
