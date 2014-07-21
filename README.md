@@ -29,6 +29,7 @@ Grunt tasks
   * `grunt compile` - Compile SCSS files
   * `grunt lint` - performs linting based on JSHint configuration and SCSS file linting
   * `grunt watch` - watches SCSS files for changes, any other compilable asses could be added in future
+  * `grunt i18n` - fills missing translations in i18n directory using dashes
 
 
 Code quality guidelines
