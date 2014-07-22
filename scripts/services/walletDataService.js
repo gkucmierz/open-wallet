@@ -49,19 +49,19 @@ angular.module('walletApp').service('WalletDataService', function(
         return false;
     };
 
-    var updateAddressBalance = function(row) {
+    var updateAddressBalance = function(entry) {
         var deferred = $q.defer();
         var maxAttemps = 3; // TODO: make config
 
-        row.loading = true;
+        entry.loading = true;
 
         var stopLoading = function() {
-            delete row.loading;
+            delete entry.loading;
         };
 
         (function loop() {
-            BitcoinDataService.getBalance(row.address).then(function(data) {
-                _.extend(row, data);
+            BitcoinDataService.getBalance(entry.address).then(function(data) {
+                _.extend(entry, data);
                 _this.save();
 
                 stopLoading();
@@ -79,6 +79,7 @@ angular.module('walletApp').service('WalletDataService', function(
         return deferred.promise;
     };
 
+
     (function() {
         // init
         data = decompress(StorageService.default(storageKey, compress([
@@ -89,13 +90,13 @@ angular.module('walletApp').service('WalletDataService', function(
     _this = {
         getSum: function(property) {
             property = property || 'balance';
-            return _.reduce(data, function(sum, row) {
-                var val = row[property]+0 ? row[property] : 0;
+            return _.reduce(data, function(sum, entry) {
+                var val = entry[property]+0 ? entry[property] : 0;
                 return sum + val;
             }, 0);
         },
-        deleteRow: function(row) {
-            var index = data.indexOf(row);
+        deleteRow: function(entry) {
+            var index = data.indexOf(entry);
             if (index === -1) return UtilsService.noop;
 
             UndoActionService.doAction(function() {
@@ -103,7 +104,7 @@ angular.module('walletApp').service('WalletDataService', function(
                 _this.save();
                 return {
                     reverse: function() {
-                        data.splice(index, 0, row);
+                        data.splice(index, 0, entry);
                         _this.save();
                     },
                     translationKey: 'DELETE_WALLET_ENTRY'
@@ -112,7 +113,7 @@ angular.module('walletApp').service('WalletDataService', function(
         },
         addAddress: function(address) {
             var addressRow = findAddressRow(address);
-            var row;
+            var entry;
             if (!isValidAddress(address)) {
                 // address is invalid
                 return false;
@@ -125,13 +126,13 @@ angular.module('walletApp').service('WalletDataService', function(
                 return false;
             }
             
-            row = {
+            entry = {
                 address: address
             };
-            data.push(row);
+            data.push(entry);
             _this.save();
 
-            updateAddressBalance(row);
+            updateAddressBalance(entry);
 
             return true;
         },
@@ -144,10 +145,10 @@ angular.module('walletApp').service('WalletDataService', function(
             var i = 0;
 
             (function loop() {
-                var row = data[i++];
+                var entry = data[i++];
                 if (i > data.length) return;
 
-                updateAddressBalance(row).then(loop);
+                updateAddressBalance(entry).then(loop);
             })();
         },
         save: function() {

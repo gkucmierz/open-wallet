@@ -29,8 +29,8 @@ angular.module('walletApp').directive('bulkAdd', function (
             };
 
             scope.add = function() {
-                var fetchedAddresses = _.map(scope.foundEntries, function(row) {
-                    return row.address;
+                var fetchedAddresses = _.map(scope.foundEntries, function(entry) {
+                    return entry.address;
                 });
                 scope.addCallback(fetchedAddresses);
                 scope.cancel();
