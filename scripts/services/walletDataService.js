@@ -7,32 +7,35 @@ angular.module('walletApp').service('WalletDataService', function(
     UtilsService,
     UndoActionService,
     BitcoinDataService,
-    BitcoreService
+    BitcoreService,
+    WalletEntryService
 ) {
     var storageKey = 'wallet';
     var data, _this;
 
     var compress = function(data) {
-        return _.map(data, function(fullRow) {
+        return _.map(data, function(fullEntry) {
             var res = {
-                a: fullRow.address
+                a: fullEntry.address
             };
-            if (!_.isUndefined(fullRow.received)) res.r = fullRow.received;
-            if (!_.isUndefined(fullRow.sent)) res.s = fullRow.sent;
+            if (!_.isUndefined(fullEntry.received)) res.r = fullEntry.received;
+            if (!_.isUndefined(fullEntry.sent)) res.s = fullEntry.sent;
             return res;
         });
     };
 
     var decompress = function(data) {
-        return _.map(data, function(smallRow) {
+        return _.map(data, function(smallEntry) {
             var res = {
-                address: smallRow.a
+                address: smallEntry.a
             };
-            if (!_.isUndefined(smallRow.r)) res.received = smallRow.r;
-            if (!_.isUndefined(smallRow.s)) res.sent = smallRow.s;
-            if (!_.isUndefined(smallRow.r) && !_.isUndefined(smallRow.s)) {
-                res.balance = smallRow.r - smallRow.s;
+            if (!_.isUndefined(smallEntry.r)) res.received = smallEntry.r;
+            if (!_.isUndefined(smallEntry.s)) res.sent = smallEntry.s;
+            if (!_.isUndefined(smallEntry.r) && !_.isUndefined(smallEntry.s)) {
+                res.balance = smallEntry.r - smallEntry.s;
             }
+            WalletEntryService.determineType(res);
+
             return res;
         });
     };
@@ -49,19 +52,19 @@ angular.module('walletApp').service('WalletDataService', function(
         return false;
     };
 
-    var updateAddressBalance = function(row) {
+    var updateAddressBalance = function(entry) {
         var deferred = $q.defer();
         var maxAttemps = 3; // TODO: make config
 
-        row.loading = true;
+        entry.loading = true;
 
         var stopLoading = function() {
-            delete row.loading;
+            delete entry.loading;
         };
 
         (function loop() {
-            BitcoinDataService.getBalance(row.address).then(function(data) {
-                _.extend(row, data);
+            BitcoinDataService.getBalance(entry.address).then(function(data) {
+                _.extend(entry, data);
                 _this.save();
 
                 stopLoading();
@@ -89,13 +92,13 @@ angular.module('walletApp').service('WalletDataService', function(
     _this = {
         getSum: function(property) {
             property = property || 'balance';
-            return _.reduce(data, function(sum, row) {
-                var val = row[property]+0 ? row[property] : 0;
+            return _.reduce(data, function(sum, entry) {
+                var val = entry[property]+0 ? entry[property] : 0;
                 return sum + val;
             }, 0);
         },
-        deleteRow: function(row) {
-            var index = data.indexOf(row);
+        deleteRow: function(entry) {
+            var index = data.indexOf(entry);
             if (index === -1) return UtilsService.noop;
 
             UndoActionService.doAction(function() {
@@ -103,7 +106,7 @@ angular.module('walletApp').service('WalletDataService', function(
                 _this.save();
                 return {
                     reverse: function() {
-                        data.splice(index, 0, row);
+                        data.splice(index, 0, entry);
                         _this.save();
                     },
                     translationKey: 'DELETE_WALLET_ENTRY'
@@ -112,7 +115,7 @@ angular.module('walletApp').service('WalletDataService', function(
         },
         addAddress: function(address) {
             var addressRow = findAddressRow(address);
-            var row;
+            var entry;
             if (!isValidAddress(address)) {
                 // address is invalid
                 return false;
@@ -125,34 +128,30 @@ angular.module('walletApp').service('WalletDataService', function(
                 return false;
             }
             
-            row = {
+            entry = {
                 address: address
             };
-            data.push(row);
+            data.push(entry);
             _this.save();
 
-            updateAddressBalance(row);
+            updateAddressBalance(entry);
+            WalletEntryService.determineType(entry);
 
             return true;
         },
         addAddresses: function(addresses) {
             _.map(addresses, function(address) {
-                var row = {
-                    address: address
-                };
-                data.push(row);
-                updateAddressBalance(row);
+                _this.addAddress(address);
             });
-            _this.save();
         },
         checkBalances: function() {
             var i = 0;
 
             (function loop() {
-                var row = data[i++];
+                var entry = data[i++];
                 if (i > data.length) return;
 
-                updateAddressBalance(row).then(loop);
+                updateAddressBalance(entry).then(loop);
             })();
         },
         save: function() {
