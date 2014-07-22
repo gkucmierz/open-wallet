@@ -131,6 +131,10 @@ angular.module('walletApp').service('WalletDataService', function(
         return true;
     };
 
+    var saveToStorage = _.throttle(function() {
+        StorageService.set(storageKey, compress(data));
+    }, 5e2);
+
     (function() {
         // init
         data = decompress(StorageService.default(storageKey, compress([
@@ -197,7 +201,7 @@ angular.module('walletApp').service('WalletDataService', function(
             })();
         },
         save: function() {
-            StorageService.set(storageKey, compress(data));
+            saveToStorage();
         },
         data: data
     };
