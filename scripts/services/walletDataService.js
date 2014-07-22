@@ -160,6 +160,10 @@ angular.module('walletApp').service('WalletDataService', function(
         addEntry: function(inputEntry) {
             var address = BitcoinUtilsService.privkeyToAddress(inputEntry);
 
+            if (_.isUndefined(inputEntry)) {
+                addPrivkey( BitcoinUtilsService.generatePrivkey() );
+            }
+
             // check if it is privkey
             if (address !== false) {
                 addPrivkey(inputEntry);

@@ -21,6 +21,14 @@ angular.module('walletApp').service('BitcoinUtilsService', function(
             } catch (e) {
                 return false;
             }
+        },
+        generatePrivkey: function() {
+            var opts = {
+                network: BitcoreService.networks.livenet
+            };
+            var wk = new BitcoreService.WalletKey(opts);
+            wk.generate();
+            return wk.storeObj().priv;
         }
     };
 });
