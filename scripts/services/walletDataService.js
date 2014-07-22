@@ -174,7 +174,7 @@ angular.module('walletApp').service('WalletDataService', function(
         },
         addAddresses: function(addresses) {
             _.map(addresses, function(address) {
-                _this.addAddress(address);
+                addAddress(address);
             });
         },
         checkBalances: function() {
