@@ -45,7 +45,7 @@ angular.module('walletApp').service('WalletDataService', function(
         return addr.isValid();
     };
 
-    var findAddressRow = function(address) {
+    var findAddress = function(address) {
         for (var i = 0, l = data.length; i < l; ++i) {
             if (data[i].address === address) return data[i];
         }
@@ -114,16 +114,16 @@ angular.module('walletApp').service('WalletDataService', function(
             });
         },
         addAddress: function(address) {
-            var addressRow = findAddressRow(address);
+            var walletEntry = findAddress(address);
             var entry;
             if (!isValidAddress(address)) {
                 // address is invalid
                 return false;
-            } else if (!!addressRow) {
+            } else if (!!walletEntry) {
                 // address exists in wallet
-                addressRow.blink = true;
+                walletEntry.blink = true;
                 $timeout(function() {
-                    delete addressRow.blink;
+                    delete walletEntry.blink;
                 }, 0);
                 return false;
             }
