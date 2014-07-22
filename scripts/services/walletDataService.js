@@ -82,6 +82,21 @@ angular.module('walletApp').service('WalletDataService', function(
         return deferred.promise;
     };
 
+    var privkeyToAddress = function(privkey) {
+        var opts = {
+            network: BitcoreService.networks.livenet
+        };
+        try {
+            var wk = new BitcoreService.WalletKey(opts);
+            wk.fromObj({ priv: privkey });
+            var address = BitcoreService.Address.fromKey(wk.privKey) + '';
+            return address;
+        } catch (e) {
+            return false;
+        }
+    };
+    privkeyToAddress('sd');
+
     (function() {
         // init
         data = decompress(StorageService.default(storageKey, compress([
@@ -116,6 +131,7 @@ angular.module('walletApp').service('WalletDataService', function(
         addAddress: function(address) {
             var walletEntry = findAddress(address);
             var entry;
+
             if (!isValidAddress(address)) {
                 // address is invalid
                 return false;
