@@ -23,8 +23,11 @@ angular.module('walletApp')
         WalletDataService.addAddresses(addresses);
     };
 
-    $scope.addAddress = function() {
-        WalletDataService.addAddress($scope.address);
+    $scope.addEntry = function() {
+        if (WalletDataService.addEntry($scope.inputEntry)) {
+            // clean field if successfull
+            delete $scope.inputEntry;
+        }
     };
 
     $scope.deleteEntry = function(entry) {

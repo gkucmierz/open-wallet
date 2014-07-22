@@ -8,44 +8,52 @@ angular.module('walletApp').service('WalletDataService', function(
     UndoActionService,
     BitcoinDataService,
     BitcoreService,
-    WalletEntryService
+    WalletEntryService,
+    BitcoinUtilsService
 ) {
     var storageKey = 'wallet';
     var data, _this;
 
+    // a = address
+    // r = received
+    // s = sent
+    // p = privkey
     var compress = function(data) {
         return _.map(data, function(fullEntry) {
             var res = {
                 a: fullEntry.address
             };
+
             if (!_.isUndefined(fullEntry.received)) res.r = fullEntry.received;
             if (!_.isUndefined(fullEntry.sent)) res.s = fullEntry.sent;
+            if (!_.isUndefined(fullEntry.privkey)) {
+                delete res.a;
+                res.p = fullEntry.privkey;
+            }
+
             return res;
         });
     };
 
     var decompress = function(data) {
         return _.map(data, function(smallEntry) {
-            var res = {
-                address: smallEntry.a
-            };
+            var res = {};
+
+            if (!_.isUndefined(smallEntry.a)) res.address = smallEntry.a;
+            if (!_.isUndefined(smallEntry.p)) res.privkey = smallEntry.p;
             if (!_.isUndefined(smallEntry.r)) res.received = smallEntry.r;
             if (!_.isUndefined(smallEntry.s)) res.sent = smallEntry.s;
             if (!_.isUndefined(smallEntry.r) && !_.isUndefined(smallEntry.s)) {
                 res.balance = smallEntry.r - smallEntry.s;
             }
             WalletEntryService.determineType(res);
+            WalletEntryService.recalculateParticulars(res);
 
             return res;
         });
     };
 
-    var isValidAddress = function(address) {
-        var addr = new BitcoreService.Address(address);
-        return addr.isValid();
-    };
-
-    var findAddressRow = function(address) {
+    var findAddress = function(address) {
         for (var i = 0, l = data.length; i < l; ++i) {
             if (data[i].address === address) return data[i];
         }
@@ -80,6 +88,46 @@ angular.module('walletApp').service('WalletDataService', function(
         })();
 
         return deferred.promise;
+    };
+
+    var addPrivkey = function(privkey) {
+        var address = BitcoinUtilsService.privkeyToAddress(privkey);
+        var walletEntry;
+
+        if (addAddress(address)) {
+            walletEntry = findAddress(address);
+
+            walletEntry.privkey = privkey;
+
+            _this.save();
+
+            WalletEntryService.determineType(walletEntry);
+        }
+    };
+
+    var addAddress = function(address) {
+        var walletEntry = findAddress(address);
+        var newEntry;
+
+        if (!!walletEntry) {
+            // address exists in wallet
+            walletEntry.blink = true;
+            $timeout(function() {
+                delete walletEntry.blink;
+            }, 0);
+            return false;
+        }
+        
+        newEntry = {
+            address: address
+        };
+        data.push(newEntry);
+        _this.save();
+
+        WalletEntryService.determineType(newEntry);
+        updateAddressBalance(newEntry);
+
+        return true;
     };
 
     var saveToStorage = _.throttle(function() {
@@ -117,35 +165,28 @@ angular.module('walletApp').service('WalletDataService', function(
                 };
             });
         },
-        addAddress: function(address) {
-            var addressRow = findAddressRow(address);
-            var entry;
-            if (!isValidAddress(address)) {
-                // address is invalid
-                return false;
-            } else if (!!addressRow) {
-                // address exists in wallet
-                addressRow.blink = true;
-                $timeout(function() {
-                    delete addressRow.blink;
-                }, 0);
-                return false;
+        addEntry: function(inputEntry) {
+            var address = BitcoinUtilsService.privkeyToAddress(inputEntry);
+
+            if (_.isUndefined(inputEntry)) {
+                addPrivkey( BitcoinUtilsService.generatePrivkey() );
             }
-            
-            entry = {
-                address: address
-            };
-            data.push(entry);
-            _this.save();
 
-            updateAddressBalance(entry);
-            WalletEntryService.determineType(entry);
-
-            return true;
+            // check if it is privkey
+            if (address !== false) {
+                addPrivkey(inputEntry);
+                return true;
+            }
+            // or address…
+            if (BitcoinUtilsService.isValidAddress(inputEntry)) {
+                addAddress(inputEntry);
+                return true;
+            }
+            return false;
         },
         addAddresses: function(addresses) {
             _.map(addresses, function(address) {
-                _this.addAddress(address);
+                addAddress(address);
             });
         },
         checkBalances: function() {

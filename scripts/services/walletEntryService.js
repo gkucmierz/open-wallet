@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('walletApp').service('WalletEntryService', function() {
+angular.module('walletApp').service('WalletEntryService', function(
+    BitcoinUtilsService
+) {
     var ENTRY_TYPES = {
         ADDRESS: 0,
         PRIVKEY: 1,
@@ -15,6 +17,11 @@ angular.module('walletApp').service('WalletEntryService', function() {
                 entry.type = ENTRY_TYPES.PRIVKEY;
             } else if (!_.isUndefined( entry.address )) {
                 entry.type = ENTRY_TYPES.ADDRESS;
+            }
+        },
+        recalculateParticulars: function(entry) {
+            if (_.isUndefined(entry.address)) {
+                entry.address = BitcoinUtilsService.privkeyToAddress(entry.privkey);
             }
         }
     };

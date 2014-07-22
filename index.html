@@ -40,6 +40,7 @@
     <script src="scripts/services/walletDataService.js"></script>
     <script src="scripts/services/storageService.js"></script>
     <script src="scripts/services/walletEntryService.js"></script>
+    <script src="scripts/services/bitcoinUtilsService.js"></script>
 
     <!-- directives -->
     <script src="scripts/directives/undoDialog.js"></script>
@@ -124,8 +125,8 @@
 
     <br/>
 
-    <input type="text" ng-model="address" placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}" />
-    <input type="button" ng-click="addAddress()" value="+" />
+    <input type="text" ng-model="inputEntry" placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}" />
+    <input type="button" ng-click="addEntry()" value="+" />
 
     <span class="bulk-add" add-callback="addAddresses"></span>
 
