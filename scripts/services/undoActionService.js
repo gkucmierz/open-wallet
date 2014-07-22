@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('walletApp').service('UndoActionService', function(
+    $log
 ) {
     var isDialogConnected = false;
     var dialogScope;
@@ -30,7 +31,7 @@ angular.module('walletApp').service('UndoActionService', function(
 
                 dialogScope.undos.push(undoObj);
             } else {
-                console.log('can`t run this action');
+                $log.error('can`t run this action');
             }
         },
         registerDialog: function(scope) {
@@ -38,7 +39,7 @@ angular.module('walletApp').service('UndoActionService', function(
                 isDialogConnected = true;
                 dialogScope = scope;
             } else {
-                console.log('dialog is connected now');
+                $log.info('dialog is connected now');
             }
         }
     };
