@@ -7,13 +7,9 @@ angular.module('walletApp').service('WalletDataService', function(
     UtilsService,
     UndoActionService,
     BitcoinDataService,
-    BitcoreService
+    BitcoreService,
+    WalletEntryService
 ) {
-    var ENTRY_TYPES = {
-        ADDRESS: 0,
-        PRIVKEY: 1,
-        ENCRYPTED_PRIVKEY: 2
-    };
     var storageKey = 'wallet';
     var data, _this;
 
@@ -84,16 +80,6 @@ angular.module('walletApp').service('WalletDataService', function(
         return deferred.promise;
     };
 
-    var determineEntryType = function(entry) {
-        if (!_.isUndefined( entry.encryptedPrivkey )) {
-            entry.type = ENTRY_TYPES.ENCRYPTED_PRIVKEY;
-        } else if (!_.isUndefined( entry.privkey )) {
-            entry.type = ENTRY_TYPES.PRIVKEY;
-        } else if (!_.isUndefined( entry.address )) {
-            entry.type = ENTRY_TYPES.ADDRESS;
-        }
-    };
-
     (function() {
         // init
         data = decompress(StorageService.default(storageKey, compress([
@@ -147,7 +133,7 @@ angular.module('walletApp').service('WalletDataService', function(
             _this.save();
 
             updateAddressBalance(entry);
-            determineEntryType(entry);
+            WalletEntryService.determineType(entry);
 
             return true;
         },
