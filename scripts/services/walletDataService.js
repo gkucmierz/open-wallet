@@ -95,7 +95,42 @@ angular.module('walletApp').service('WalletDataService', function(
             return false;
         }
     };
-    privkeyToAddress('sd');
+
+    var addPrivkey = function(privkey) {
+        var address = privkeyToAddress(privkey);
+        var walletEntry;
+
+        if (addAddress(address)) {
+            walletEntry = findAddress(address);
+            walletEntry.privkey = privkey;
+            WalletEntryService.determineType(walletEntry);
+        }
+    };
+
+    var addAddress = function(address) {
+        var walletEntry = findAddress(address);
+        var newEntry;
+
+        if (!!walletEntry) {
+            // address exists in wallet
+            walletEntry.blink = true;
+            $timeout(function() {
+                delete walletEntry.blink;
+            }, 0);
+            return false;
+        }
+        
+        newEntry = {
+            address: address
+        };
+        data.push(newEntry);
+        _this.save();
+
+        WalletEntryService.determineType(newEntry);
+        updateAddressBalance(newEntry);
+
+        return true;
+    };
 
     (function() {
         // init
@@ -128,32 +163,20 @@ angular.module('walletApp').service('WalletDataService', function(
                 };
             });
         },
-        addAddress: function(address) {
-            var walletEntry = findAddress(address);
-            var entry;
+        addEntry: function(inputEntry) {
+            var address = privkeyToAddress(inputEntry);
 
-            if (!isValidAddress(address)) {
-                // address is invalid
-                return false;
-            } else if (!!walletEntry) {
-                // address exists in wallet
-                walletEntry.blink = true;
-                $timeout(function() {
-                    delete walletEntry.blink;
-                }, 0);
-                return false;
+            // check if it is privkey
+            if (address !== false) {
+                addPrivkey(inputEntry);
+                return true;
             }
-            
-            entry = {
-                address: address
-            };
-            data.push(entry);
-            _this.save();
-
-            updateAddressBalance(entry);
-            WalletEntryService.determineType(entry);
-
-            return true;
+            // or address…
+            if (isValidAddress(inputEntry)) {
+                addAddress(inputEntry);
+                return true;
+            }
+            return false;
         },
         addAddresses: function(addresses) {
             _.map(addresses, function(address) {
