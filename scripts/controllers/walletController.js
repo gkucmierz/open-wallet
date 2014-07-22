@@ -24,7 +24,10 @@ angular.module('walletApp')
     };
 
     $scope.addEntry = function() {
-        WalletDataService.addEntry($scope.inputEntry);
+        if (WalletDataService.addEntry($scope.inputEntry)) {
+            // clean field if successfull
+            delete $scope.inputEntry;
+        }
     };
 
     $scope.deleteEntry = function(entry) {
