@@ -9,10 +9,10 @@ angular.module('walletApp')
     $scope.wallet = WalletDataService.data;
 
     $scope.sortByBalance = function() {
-        $scope.wallet = $scope.wallet.sort(function(rowA, rowB) {
+        $scope.wallet = $scope.wallet.sort(function(entryA, entryB) {
             var balance = {
-                a: rowA.balance || 0,
-                b: rowB.balance || 0
+                a: entryA.balance || 0,
+                b: entryB.balance || 0
             };
             return balance.b - balance.a;
         });
@@ -27,8 +27,8 @@ angular.module('walletApp')
         WalletDataService.addAddress($scope.address);
     };
 
-    $scope.deleteRow = function(row) {
-        WalletDataService.deleteRow(row);
+    $scope.deleteEntry = function(entry) {
+        WalletDataService.deleteRow(entry);
     };
 
     $scope.checkBalances = function() {

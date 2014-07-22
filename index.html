@@ -39,6 +39,7 @@
     <script src="scripts/services/undoActionService.js"></script>
     <script src="scripts/services/walletDataService.js"></script>
     <script src="scripts/services/storageService.js"></script>
+    <script src="scripts/services/walletEntryService.js"></script>
 
     <!-- directives -->
     <script src="scripts/directives/undoDialog.js"></script>
@@ -84,30 +85,38 @@
         </span>
     </div>
     <ul class="wallet-list">
-        <li ng-repeat=" row in wallet " ng-class="{ blink: row.blink }">
+        <li ng-repeat=" entry in wallet " ng-class="{ blink: entry.blink }">
             <span class="address">
-                {{ row.address }}
+                {{ entry.address }}
             </span>
 
             <span
                 class="received"
-                ng-class="{ soft: row.received === 0 }"
+                ng-class="{ soft: entry.received === 0 }"
             >
-                {{ row.received | btc }}
+                {{ entry.received | btc }}
             </span>
 
             <span
                 class="balance"
-                ng-class="{ soft: row.balance === 0 }"
+                ng-class="{ soft: entry.balance === 0 }"
             >
-                {{ row.balance | btc }}
+                {{ entry.balance | btc }}
             </span>
 
-            <span class="trash" ng-click="deleteRow(row)" title="{{ 'WALLET.TABLE_ENTRIES.DELETE' | translate }}">
-                <i class="fa fa-trash-o"></i>
+            <span class="icons">                
+                <span class="type">
+                    <i ng-if=" entry.type === 0 " class="fa fa-eye fa-fw"></i>
+                    <i ng-if=" entry.type === 1 " class="fa fa-key fa-fw"></i>
+                    <i ng-if=" entry.type === 2 " class="fa fa-lock fa-fw"></i>
+                </span>
+
+                <span class="trash" ng-click="deleteEntry(entry)" title="{{ 'WALLET.TABLE_ENTRIES.DELETE' | translate }}">
+                    <i class="fa fa-trash-o"></i>
+                </span>
             </span>
 
-            <span ng-show=" row.loading " class="loading">
+            <span ng-show=" entry.loading " class="loading">
                 <i class="fa fa-spinner fa-spin"></i>
             </span>
         </li>
