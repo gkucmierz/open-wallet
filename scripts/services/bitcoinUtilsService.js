@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('walletApp').service('BitcoinUtilsService', function(
+    $log,
     BitcoreService
 ) {
 
@@ -16,9 +17,9 @@ angular.module('walletApp').service('BitcoinUtilsService', function(
             try {
                 var wk = new BitcoreService.WalletKey(opts);
                 wk.fromObj({ priv: privkey });
-                var address = BitcoreService.Address.fromKey(wk.privKey) + '';
-                return address;
+                return wk.storeObj().addr;
             } catch (e) {
+                $log.warn('given privkey is not properly');
                 return false;
             }
         },
