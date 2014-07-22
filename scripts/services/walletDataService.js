@@ -8,41 +8,49 @@ angular.module('walletApp').service('WalletDataService', function(
     UndoActionService,
     BitcoinDataService,
     BitcoreService,
-    WalletEntryService
+    WalletEntryService,
+    BitcoinUtilsService
 ) {
     var storageKey = 'wallet';
     var data, _this;
 
+    // a = address
+    // r = received
+    // s = sent
+    // p = privkey
     var compress = function(data) {
         return _.map(data, function(fullEntry) {
             var res = {
                 a: fullEntry.address
             };
+
             if (!_.isUndefined(fullEntry.received)) res.r = fullEntry.received;
             if (!_.isUndefined(fullEntry.sent)) res.s = fullEntry.sent;
+            if (!_.isUndefined(fullEntry.privkey)) {
+                delete res.a;
+                res.p = fullEntry.privkey;
+            }
+
             return res;
         });
     };
 
     var decompress = function(data) {
         return _.map(data, function(smallEntry) {
-            var res = {
-                address: smallEntry.a
-            };
+            var res = {};
+
+            if (!_.isUndefined(smallEntry.a)) res.address = smallEntry.a;
+            if (!_.isUndefined(smallEntry.p)) res.privkey = smallEntry.p;
             if (!_.isUndefined(smallEntry.r)) res.received = smallEntry.r;
             if (!_.isUndefined(smallEntry.s)) res.sent = smallEntry.s;
             if (!_.isUndefined(smallEntry.r) && !_.isUndefined(smallEntry.s)) {
                 res.balance = smallEntry.r - smallEntry.s;
             }
             WalletEntryService.determineType(res);
+            WalletEntryService.recalculateParticulars(res);
 
             return res;
         });
-    };
-
-    var isValidAddress = function(address) {
-        var addr = new BitcoreService.Address(address);
-        return addr.isValid();
     };
 
     var findAddress = function(address) {
@@ -82,22 +90,8 @@ angular.module('walletApp').service('WalletDataService', function(
         return deferred.promise;
     };
 
-    var privkeyToAddress = function(privkey) {
-        var opts = {
-            network: BitcoreService.networks.livenet
-        };
-        try {
-            var wk = new BitcoreService.WalletKey(opts);
-            wk.fromObj({ priv: privkey });
-            var address = BitcoreService.Address.fromKey(wk.privKey) + '';
-            return address;
-        } catch (e) {
-            return false;
-        }
-    };
-
     var addPrivkey = function(privkey) {
-        var address = privkeyToAddress(privkey);
+        var address = BitcoinUtilsService.privkeyToAddress(privkey);
         var walletEntry;
 
         if (addAddress(address)) {
@@ -164,7 +158,7 @@ angular.module('walletApp').service('WalletDataService', function(
             });
         },
         addEntry: function(inputEntry) {
-            var address = privkeyToAddress(inputEntry);
+            var address = BitcoinUtilsService.privkeyToAddress(inputEntry);
 
             // check if it is privkey
             if (address !== false) {
@@ -172,7 +166,7 @@ angular.module('walletApp').service('WalletDataService', function(
                 return true;
             }
             // or address…
-            if (isValidAddress(inputEntry)) {
+            if (BitcoinUtilsService.isValidAddress(inputEntry)) {
                 addAddress(inputEntry);
                 return true;
             }
