@@ -14,26 +14,28 @@ angular.module('walletApp').service('WalletDataService', function(
     var data, _this;
 
     var compress = function(data) {
-        return _.map(data, function(fullRow) {
+        return _.map(data, function(fullEntry) {
             var res = {
-                a: fullRow.address
+                a: fullEntry.address
             };
-            if (!_.isUndefined(fullRow.received)) res.r = fullRow.received;
-            if (!_.isUndefined(fullRow.sent)) res.s = fullRow.sent;
+            if (!_.isUndefined(fullEntry.received)) res.r = fullEntry.received;
+            if (!_.isUndefined(fullEntry.sent)) res.s = fullEntry.sent;
             return res;
         });
     };
 
     var decompress = function(data) {
-        return _.map(data, function(smallRow) {
+        return _.map(data, function(smallEntry) {
             var res = {
-                address: smallRow.a
+                address: smallEntry.a
             };
-            if (!_.isUndefined(smallRow.r)) res.received = smallRow.r;
-            if (!_.isUndefined(smallRow.s)) res.sent = smallRow.s;
-            if (!_.isUndefined(smallRow.r) && !_.isUndefined(smallRow.s)) {
-                res.balance = smallRow.r - smallRow.s;
+            if (!_.isUndefined(smallEntry.r)) res.received = smallEntry.r;
+            if (!_.isUndefined(smallEntry.s)) res.sent = smallEntry.s;
+            if (!_.isUndefined(smallEntry.r) && !_.isUndefined(smallEntry.s)) {
+                res.balance = smallEntry.r - smallEntry.s;
             }
+            WalletEntryService.determineType(res);
+
             return res;
         });
     };
