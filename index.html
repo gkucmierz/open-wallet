@@ -105,7 +105,9 @@
 
             <span class="icons">                
                 <span class="type">
-                    <i class="fa fa-eye"></i>
+                    <i ng-if=" row.type === 0 " class="fa fa-eye fa-fw"></i>
+                    <i ng-if=" row.type === 1 " class="fa fa-key fa-fw"></i>
+                    <i ng-if=" row.type === 2 " class="fa fa-lock fa-fw"></i>
                 </span>
 
                 <span class="trash" ng-click="deleteRow(row)" title="{{ 'WALLET.TABLE_ENTRIES.DELETE' | translate }}">

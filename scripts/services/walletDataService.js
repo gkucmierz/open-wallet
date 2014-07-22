@@ -137,13 +137,8 @@ angular.module('walletApp').service('WalletDataService', function(
         },
         addAddresses: function(addresses) {
             _.map(addresses, function(address) {
-                var row = {
-                    address: address
-                };
-                data.push(row);
-                updateAddressBalance(row);
+                _this.addAddress(address);
             });
-            _this.save();
         },
         checkBalances: function() {
             var i = 0;
