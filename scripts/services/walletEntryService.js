@@ -20,7 +20,6 @@ angular.module('walletApp').service('WalletEntryService', function(
             }
         },
         recalculateParticulars: function(entry) {
-            console.log(entry);
             if (_.isUndefined(entry.address)) {
                 entry.address = BitcoinUtilsService.privkeyToAddress(entry.privkey);
             }
