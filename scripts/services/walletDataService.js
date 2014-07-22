@@ -10,9 +10,9 @@ angular.module('walletApp').service('WalletDataService', function(
     BitcoreService
 ) {
     var ENTRY_TYPES = {
-        ADDRESS: 1,
-        PRIVKEY: 2,
-        ENCRYPTED_PRIVKEY: 3
+        ADDRESS: 0,
+        PRIVKEY: 1,
+        ENCRYPTED_PRIVKEY: 2
     };
     var storageKey = 'wallet';
     var data, _this;
