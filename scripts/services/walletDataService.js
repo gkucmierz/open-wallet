@@ -96,7 +96,6 @@ angular.module('walletApp').service('WalletDataService', function(
 
         if (addAddress(address)) {
             walletEntry = findAddress(address);
-            console.log(walletEntry);
 
             walletEntry.privkey = privkey;
 
