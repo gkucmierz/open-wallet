@@ -2,7 +2,8 @@
 
 angular.module('walletApp').service('WalletEntryService', function(
     $timeout,
-    BitcoinUtilsService
+    BitcoinUtilsService,
+    UtilsService
 ) {
     var ENTRY_TYPES = {
         ADDRESS: 0,
@@ -25,10 +26,12 @@ angular.module('walletApp').service('WalletEntryService', function(
                 entry.address = BitcoinUtilsService.privkeyToAddress(entry.privkey);
             }
         },
-        blink: function(entry) {
-            entry.blink = true;
+        blink: function(entry, type) {
+            var property = 'blink' + UtilsService.capitalize(type);
+            
+            entry[property] = true;
             $timeout(function() {
-                delete entry.blink;
+                delete entry[property];
             }, 0);
         }
     };

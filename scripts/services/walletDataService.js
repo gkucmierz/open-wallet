@@ -123,6 +123,8 @@ angular.module('walletApp').service('WalletDataService', function(
         WalletEntryService.determineType(newEntry);
         updateAddressBalance(newEntry);
 
+        WalletEntryService.blink(newEntry, 'success');
+
         return true;
     };
 
