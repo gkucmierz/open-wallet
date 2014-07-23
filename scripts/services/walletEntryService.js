@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('walletApp').service('WalletEntryService', function(
+    $timeout,
     BitcoinUtilsService
 ) {
     var ENTRY_TYPES = {
@@ -23,6 +24,12 @@ angular.module('walletApp').service('WalletEntryService', function(
             if (_.isUndefined(entry.address)) {
                 entry.address = BitcoinUtilsService.privkeyToAddress(entry.privkey);
             }
+        },
+        blink: function(entry) {
+            entry.blink = true;
+            $timeout(function() {
+                delete entry.blink;
+            }, 0);
         }
     };
 });

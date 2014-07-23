@@ -2,7 +2,6 @@
 
 angular.module('walletApp').service('WalletDataService', function(
     $q,
-    $timeout,
     StorageService,
     UtilsService,
     UndoActionService,
@@ -111,10 +110,7 @@ angular.module('walletApp').service('WalletDataService', function(
 
         if (!!walletEntry) {
             // address exists in wallet
-            walletEntry.blink = true;
-            $timeout(function() {
-                delete walletEntry.blink;
-            }, 0);
+            WalletEntryService.blink(walletEntry, 'error');
             return false;
         }
         
