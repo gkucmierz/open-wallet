@@ -31,7 +31,7 @@ angular.module('walletApp')
     };
 
     $scope.deleteEntry = function(entry) {
-        WalletDataService.deleteRow(entry);
+        WalletDataService.deleteEntry(entry);
     };
 
     $scope.checkBalances = function() {

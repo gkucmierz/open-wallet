@@ -149,7 +149,7 @@ angular.module('walletApp').service('WalletDataService', function(
                 return sum + val;
             }, 0);
         },
-        deleteRow: function(entry) {
+        deleteEntry: function(entry) {
             var index = data.indexOf(entry);
             if (index === -1) return UtilsService.noop;
 
