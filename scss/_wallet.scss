@@ -74,9 +74,16 @@ $walletRowHeight: 26px;
         &:hover {
             background-color: #ddd;
         }
+
         @include build-prefix-values(transition, background-color 500ms ease);
-        &.blink {
+        &.blinkError {
             background-color: #e44;
+        }
+        &.blinkSuccess {
+            background-color: #4b0;
+        }
+        &.blinkError,
+        &.blinkSuccess {
             @include build-prefix-values(transition, background-color 0 ease);
         }
 
