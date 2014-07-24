@@ -8,49 +8,12 @@ angular.module('walletApp').service('WalletDataService', function(
     BitcoinDataService,
     BitcoreService,
     WalletEntryService,
-    BitcoinUtilsService
+    BitcoinUtilsService,
+    WalletCompressService
 ) {
     var storageKey = 'wallet';
     var data, _this;
 
-    // a = address
-    // r = received
-    // s = sent
-    // p = privkey
-    var compress = function(data) {
-        return _.map(data, function(fullEntry) {
-            var res = {
-                a: fullEntry.address
-            };
-
-            if (!_.isUndefined(fullEntry.received)) res.r = fullEntry.received;
-            if (!_.isUndefined(fullEntry.sent)) res.s = fullEntry.sent;
-            if (!_.isUndefined(fullEntry.privkey)) {
-                delete res.a;
-                res.p = fullEntry.privkey;
-            }
-
-            return res;
-        });
-    };
-
-    var decompress = function(data) {
-        return _.map(data, function(smallEntry) {
-            var res = {};
-
-            if (!_.isUndefined(smallEntry.a)) res.address = smallEntry.a;
-            if (!_.isUndefined(smallEntry.p)) res.privkey = smallEntry.p;
-            if (!_.isUndefined(smallEntry.r)) res.received = smallEntry.r;
-            if (!_.isUndefined(smallEntry.s)) res.sent = smallEntry.s;
-            if (!_.isUndefined(smallEntry.r) && !_.isUndefined(smallEntry.s)) {
-                res.balance = smallEntry.r - smallEntry.s;
-            }
-            WalletEntryService.determineType(res);
-            WalletEntryService.recalculateParticulars(res);
-
-            return res;
-        });
-    };
 
     var findAddress = function(address) {
         for (var i = 0, l = data.length; i < l; ++i) {
@@ -129,14 +92,17 @@ angular.module('walletApp').service('WalletDataService', function(
     };
 
     var saveToStorage = _.throttle(function() {
-        StorageService.set(storageKey, compress(data));
+        StorageService.set(storageKey, WalletCompressService.compress(data));
     }, 5e2);
 
     (function() {
         // init
-        data = decompress(StorageService.default(storageKey, compress([
-            {address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'}
-        ])));
+        data = WalletCompressService.decompress(
+            StorageService.default(
+                storageKey,
+                WalletCompressService.compress([{address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'}])
+            )
+        );
     })();
     
     _this = {
