@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('walletApp').service('AddressWatchService', function(
-    $log
+    $log,
+    EventListenerService
 ) {
+    var eventListener = new EventListenerService(['connect', 'receiveCoins']);
     var watched = [];
 
     var watch = function() {
@@ -28,6 +30,7 @@ angular.module('walletApp').service('AddressWatchService', function(
             }
             $log.warn('this address was not watched');
             return false;
-        }
+        },
+        eventListener: eventListener
     };
 });

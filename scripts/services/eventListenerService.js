@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('walletApp').service('EventListenerService', function() {
+
     return function(eventNames) {
         var events = {};
         
@@ -22,7 +23,7 @@ angular.module('walletApp').service('EventListenerService', function() {
                     events[eventName].indexOf(fn)
                 ];
             },
-            invoke: function(eventName) {
+            emit: function(eventName) {
                 var arg = [].slice.call(arguments, 1);
                 var res = [];
                 for (var i in events[eventName]) {
