@@ -10,7 +10,7 @@ angular.module('walletApp').service('WalletDataService', function(
     WalletEntryService,
     BitcoinUtilsService,
     WalletCompressService,
-    WalletSyncService
+    AddressWatchService
 ) {
     var storageKey = 'wallet';
     var data, _this;
@@ -86,7 +86,7 @@ angular.module('walletApp').service('WalletDataService', function(
 
         WalletEntryService.determineType(newEntry);
         updateAddressBalance(newEntry);
-        WalletSyncService.watch(newEntry);
+        AddressWatchService.watch(newEntry.address);
 
         WalletEntryService.blink(newEntry, 'success');
 
@@ -122,13 +122,13 @@ angular.module('walletApp').service('WalletDataService', function(
             UndoActionService.doAction(function() {
                 data.splice(index, 1);
                 _this.save();
-                WalletSyncService.unwatch(entry);
+                AddressWatchService.unwatch(entry.address);
 
                 return {
                     reverse: function() {
                         data.splice(index, 0, entry);
                         _this.save();
-                        WalletSyncService.watch(entry);
+                        AddressWatchService.watch(entry.address);
                     },
                     translationKey: 'DELETE_WALLET_ENTRY'
                 };
