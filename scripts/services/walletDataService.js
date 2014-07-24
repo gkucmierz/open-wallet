@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('walletApp').service('WalletDataService', function(
+    $log,
     $q,
     StorageService,
     UtilsService,
@@ -73,7 +74,7 @@ angular.module('walletApp').service('WalletDataService', function(
         var newEntry;
 
         if (!!walletEntry) {
-            // address exists in wallet
+            $log.warn('address exists in wallet');
             WalletEntryService.blink(walletEntry, 'error');
             return false;
         }
