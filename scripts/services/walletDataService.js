@@ -132,7 +132,7 @@ angular.module('walletApp').service('WalletDataService', function(
         addEntry: function(inputEntry) {
             var address = BitcoinUtilsService.privkeyToAddress(inputEntry);
 
-            if (_.isUndefined(inputEntry)) {
+            if (_.isUndefined(inputEntry) || inputEntry === '') {
                 addPrivkey( BitcoinUtilsService.generatePrivkey() );
             }
 
