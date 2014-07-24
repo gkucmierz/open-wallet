@@ -177,8 +177,7 @@ angular.module('walletApp').service('WalletDataService', function(
             }
             // or address…
             if (BitcoinUtilsService.isValidAddress(inputEntry)) {
-                addAddress(inputEntry);
-                return true;
+                return addAddress(inputEntry);
             }
             return false;
         },
