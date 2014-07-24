@@ -4,11 +4,11 @@ angular.module('walletApp').service('WalletSyncService', function(
 ) {
 
     return {
-        watch: function(address, walletEntry) {
-            void(address, walletEntry);
+        watch: function(walletEntry) {
+            void(walletEntry);
         },
-        unwatch: function(address) {
-            void(address);
+        unwatch: function(walletEntry) {
+            void(walletEntry);
         }
     };
 });
