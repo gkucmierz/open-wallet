@@ -105,6 +105,11 @@ angular.module('walletApp').service('WalletDataService', function(
                 WalletCompressService.compress([{address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'}])
             )
         );
+
+        // add watches
+        _.map(data, function(entry) {
+            AddressWatchService.watch(entry.address);
+        });
     })();
     
     _this = {
