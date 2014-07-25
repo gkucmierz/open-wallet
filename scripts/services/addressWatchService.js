@@ -6,10 +6,34 @@ angular.module('walletApp').service('AddressWatchService', function(
 ) {
     var eventListener = new EventListenerService(['connect', 'receiveCoins']);
     var watched = [];
+    var watchQueue = [];
 
-    var watch = function() {
+    var ws = new WebSocket('wss://ws.blockchain.info/inv');
 
+    ws.onopen = function() {
+        eventListener.emit('connect');
+        $log.info('Socket has been opened!');
     };
+
+    var watch = function(address) {
+        if (ws.readyState) {
+            ws.send(angular.toJson({
+                'op': 'addr_sub',
+                'addr': address
+            }));
+            $log.info('watching address: ' + address);
+        } else {
+            watchQueue.push(address);
+        }
+    };
+
+    var connectEvent = eventListener.add('connect', function() {
+        _.map(watchQueue, function(address) {
+            watch(address);
+        });
+        watchQueue = [];
+        connectEvent.detach();
+    });
 
     return {
         watch: function(address) {
