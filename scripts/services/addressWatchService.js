@@ -27,12 +27,11 @@ angular.module('walletApp').service('AddressWatchService', function(
         }
     };
 
-    var connectEvent = eventListener.add('connect', function() {
+    eventListener.once('connect', function() {
         _.map(watchQueue, function(address) {
             watch(address);
         });
         watchQueue = [];
-        connectEvent.detach();
     });
 
     return {

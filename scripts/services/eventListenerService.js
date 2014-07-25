@@ -18,6 +18,13 @@ angular.module('walletApp').service('EventListenerService', function() {
                     }
                 };
             },
+            once: function(eventName, fn) {
+                var originalEvent = this.add(eventName, fn);
+                var helperEvent = this.add(eventName, function() {
+                    originalEvent.detach();
+                    helperEvent.detach();
+                });
+            },
             remove: function(eventName, fn) {
                 delete events[eventName][
                     events[eventName].indexOf(fn)
