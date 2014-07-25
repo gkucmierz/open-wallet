@@ -15,6 +15,29 @@ angular.module('walletApp').service('AddressWatchService', function(
         $log.info('Socket has been opened!');
     };
 
+    ws.onmessage = function(message) {
+        var data = angular.fromJson(message.data);
+
+        if (data.op === 'utx') {
+            processIncomingTX(data.x);
+        }
+    };
+
+    var processIncomingTX = function(tx) {
+        _.map(tx.out, function(out) {
+            if (isWatched(out.addr)) {
+                eventListener.emit(
+                    'receiveCoins',
+                    _.pick(out, 'addr', 'value')
+                );
+            }
+        });
+    };
+
+    var isWatched = function(address) {
+        return watched.indexOf(address) !== -1;
+    };
+
     var watch = function(address) {
         if (ws.readyState) {
             ws.send(angular.toJson({
