@@ -76,14 +76,18 @@ $walletRowHeight: 26px;
         }
 
         @include build-prefix-values(transition, background-color 500ms ease);
-        &.blinkError {
+        &.blink-error {
             background-color: #e44;
         }
-        &.blinkSuccess {
+        &.blink-add {
             background-color: #4b0;
         }
-        &.blinkError,
-        &.blinkSuccess {
+        &.blink-update {
+            background-color: #28f;
+        }
+        &.blink-error,
+        &.blink-add,
+        &.blink-update {
             @include build-prefix-values(transition, background-color 0 ease);
         }
 

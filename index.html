@@ -42,6 +42,8 @@
     <script src="scripts/services/walletEntryService.js"></script>
     <script src="scripts/services/bitcoinUtilsService.js"></script>
     <script src="scripts/services/walletCompressService.js"></script>
+    <script src="scripts/services/addressWatchService.js"></script>
+    <script src="scripts/services/eventListenerService.js"></script>
 
     <!-- directives -->
     <script src="scripts/directives/undoDialog.js"></script>
@@ -90,8 +92,9 @@
         <li
             ng-repeat=" entry in wallet "
             ng-class="{
-                blinkError: entry.blinkError,
-                blinkSuccess: entry.blinkSuccess
+                'blink-error': entry.blinkError,
+                'blink-add': entry.blinkAdd,
+                'blink-update': entry.blinkUpdate
             }"
         >
             <span class="address">

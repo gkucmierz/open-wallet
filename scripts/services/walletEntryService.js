@@ -22,8 +22,13 @@ angular.module('walletApp').service('WalletEntryService', function(
             }
         },
         recalculateParticulars: function(entry) {
+            // calculate address from privkey
             if (_.isUndefined(entry.address)) {
                 entry.address = BitcoinUtilsService.privkeyToAddress(entry.privkey);
+            }
+            // calculate balance
+            if (!_.isUndefined(entry.received) && !_.isUndefined(entry.sent)) {
+                entry.balance = entry.received - entry.sent;
             }
         },
         blink: function(entry, type) {
@@ -32,7 +37,7 @@ angular.module('walletApp').service('WalletEntryService', function(
             entry[property] = true;
             $timeout(function() {
                 delete entry[property];
-            }, 0);
+            }, 50);
         }
     };
 });

@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('walletApp').service('WalletDataService', function(
+    $log,
     $q,
+    $timeout,
     StorageService,
     UtilsService,
     UndoActionService,
@@ -9,7 +11,8 @@ angular.module('walletApp').service('WalletDataService', function(
     BitcoreService,
     WalletEntryService,
     BitcoinUtilsService,
-    WalletCompressService
+    WalletCompressService,
+    AddressWatchService
 ) {
     var storageKey = 'wallet';
     var data, _this;
@@ -35,9 +38,11 @@ angular.module('walletApp').service('WalletDataService', function(
         (function loop() {
             BitcoinDataService.getBalance(entry.address).then(function(data) {
                 _.extend(entry, data);
+                stopLoading();
                 _this.save();
 
-                stopLoading();
+                WalletEntryService.blink(entry, 'update');
+
                 deferred.resolve();
             }, function() {
                 if (--maxAttemps > 0) {
@@ -72,7 +77,7 @@ angular.module('walletApp').service('WalletDataService', function(
         var newEntry;
 
         if (!!walletEntry) {
-            // address exists in wallet
+            $log.warn('address exists in wallet');
             WalletEntryService.blink(walletEntry, 'error');
             return false;
         }
@@ -85,8 +90,9 @@ angular.module('walletApp').service('WalletDataService', function(
 
         WalletEntryService.determineType(newEntry);
         updateAddressBalance(newEntry);
+        AddressWatchService.watch(newEntry.address);
 
-        WalletEntryService.blink(newEntry, 'success');
+        WalletEntryService.blink(newEntry, 'add');
 
         return true;
     };
@@ -103,6 +109,27 @@ angular.module('walletApp').service('WalletDataService', function(
                 WalletCompressService.compress([{address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh'}])
             )
         );
+
+        // add watches
+        _.map(data, function(entry) {
+            AddressWatchService.watch(entry.address);
+        });
+
+        AddressWatchService.eventListener.add('receiveCoins', function(out) {
+            var entry = findAddress(out.address);
+            $log.info('receiveCoins event for address: ' + out.address);
+
+            if (entry) {
+                entry.received += out.value;
+                WalletEntryService.recalculateParticulars(entry);
+
+                _this.save();
+
+                $timeout(function() {
+                    WalletEntryService.blink(entry, 'update');
+                }, 0);
+            }
+        });
     })();
     
     _this = {
@@ -120,10 +147,13 @@ angular.module('walletApp').service('WalletDataService', function(
             UndoActionService.doAction(function() {
                 data.splice(index, 1);
                 _this.save();
+                AddressWatchService.unwatch(entry.address);
+
                 return {
                     reverse: function() {
                         data.splice(index, 0, entry);
                         _this.save();
+                        AddressWatchService.watch(entry.address);
                     },
                     translationKey: 'DELETE_WALLET_ENTRY'
                 };
