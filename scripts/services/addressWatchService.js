@@ -26,10 +26,10 @@ angular.module('walletApp').service('AddressWatchService', function(
     var processIncomingTX = function(tx) {
         _.map(tx.out, function(out) {
             if (isWatched(out.addr)) {
-                eventListener.emit(
-                    'receiveCoins',
-                    _.pick(out, 'addr', 'value')
-                );
+                eventListener.emit('receiveCoins', {
+                    address: out.addr,
+                    value: out.value
+                });
             }
         });
     };

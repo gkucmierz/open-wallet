@@ -98,6 +98,15 @@ angular.module('walletApp').service('WalletDataService', function(
         StorageService.set(storageKey, WalletCompressService.compress(data));
     }, 5e2);
 
+    AddressWatchService.eventListener.add('receiveCoins', function(out) {
+        var entry = findAddress(out.address);
+
+        if (entry) {
+            entry.received += out.value;
+            entry.balance += out.value;
+        }
+    });
+
     (function() {
         // init
         data = WalletCompressService.decompress(
