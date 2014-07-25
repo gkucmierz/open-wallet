@@ -3,6 +3,7 @@
 angular.module('walletApp').service('WalletDataService', function(
     $log,
     $q,
+    $timeout,
     StorageService,
     UtilsService,
     UndoActionService,
@@ -37,9 +38,11 @@ angular.module('walletApp').service('WalletDataService', function(
         (function loop() {
             BitcoinDataService.getBalance(entry.address).then(function(data) {
                 _.extend(entry, data);
+                stopLoading();
                 _this.save();
 
-                stopLoading();
+                WalletEntryService.blink(entry, 'update');
+
                 deferred.resolve();
             }, function() {
                 if (--maxAttemps > 0) {
@@ -114,6 +117,7 @@ angular.module('walletApp').service('WalletDataService', function(
 
         AddressWatchService.eventListener.add('receiveCoins', function(out) {
             var entry = findAddress(out.address);
+            $log.info('receiveCoins event for address: ' + out.address);
 
             if (entry) {
                 entry.received += out.value;
@@ -121,17 +125,12 @@ angular.module('walletApp').service('WalletDataService', function(
 
                 _this.save();
 
-                WalletEntryService.blink(entry, 'update');
+                $timeout(function() {
+                    WalletEntryService.blink(entry, 'update');
+                }, 0);
             }
         });
     })();
-
-    // setInterval(function() {
-    //     AddressWatchService.eventListener.emit('receiveCoins', {
-    //         address: '1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh',
-    //         value: 100000
-    //     });
-    // }, 1e3);
     
     _this = {
         getSum: function(property) {

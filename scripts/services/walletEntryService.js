@@ -32,7 +32,7 @@ angular.module('walletApp').service('WalletEntryService', function(
             entry[property] = true;
             $timeout(function() {
                 delete entry[property];
-            }, 0);
+            }, 50);
         }
     };
 });
