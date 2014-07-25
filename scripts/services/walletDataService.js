@@ -121,7 +121,7 @@ angular.module('walletApp').service('WalletDataService', function(
 
             if (entry) {
                 entry.received += out.value;
-                entry.balance += out.value;
+                WalletEntryService.recalculateParticulars(entry);
 
                 _this.save();
 
