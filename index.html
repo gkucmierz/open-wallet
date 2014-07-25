@@ -92,8 +92,9 @@
         <li
             ng-repeat=" entry in wallet "
             ng-class="{
-                blinkError: entry.blinkError,
-                blinkSuccess: entry.blinkSuccess
+                'blink-error': entry.blinkError,
+                'blink-add': entry.blinkAdd,
+                'blink-update': entry.blinkUpdate
             }"
         >
             <span class="address">
