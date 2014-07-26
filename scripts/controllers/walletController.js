@@ -41,5 +41,4 @@ angular.module('walletApp')
     $scope.sumBalances = function(type) {
         return WalletDataService.getSum(type);
     };
-
 });
