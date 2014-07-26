@@ -19,7 +19,7 @@ angular.module('walletApp').directive('bulkAdd', function (
         scope: {
             addCallback: '='
         },
-        link: function(scope) {
+        link: function(scope, element) {
             scope.foundEntries = [];
             scope.inputText = '';
 
@@ -48,6 +48,12 @@ angular.module('walletApp').directive('bulkAdd', function (
                 scope.foundEntries = _.filter(allEntries, function(entry) {
                     return isValidAddress(entry.address);
                 });
+            });
+
+            scope.$watch('adding', function(adding) {
+                if (adding === true) {
+                    $('textarea', element).focus();
+                }
             });
 
         }
