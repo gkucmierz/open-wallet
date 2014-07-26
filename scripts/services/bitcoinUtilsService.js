@@ -4,6 +4,7 @@ angular.module('walletApp').service('BitcoinUtilsService', function(
     $log,
     BitcoreService
 ) {
+    // window.b = BitcoreService;
 
     return {
         isValidAddress: function(address) {
@@ -24,12 +25,8 @@ angular.module('walletApp').service('BitcoinUtilsService', function(
             }
         },
         generatePrivkey: function() {
-            var opts = {
-                network: BitcoreService.networks.livenet
-            };
-            var wk = new BitcoreService.WalletKey(opts);
-            wk.generate();
-            return wk.storeObj().priv;
+            var key = BitcoreService.Key.generateSync();
+            return key.private.toString('hex');
         }
     };
 });
