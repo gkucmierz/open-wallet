@@ -2,11 +2,12 @@
 
 angular.module('walletApp').service('DataQueueService', function(
     $http,
-    $q
+    $q,
+    UtilsService
 ) {
     var queue = [];
     var simultaneouslyConnections = {
-        limit: 5,
+        limit: 2,
         current: 0
     };
     
@@ -26,24 +27,33 @@ angular.module('walletApp').service('DataQueueService', function(
         $http({method: 'GET', url: request.url})
         .success(function(data) {
             --simultaneouslyConnections.current;
-            request.deferred.resolve(data);
+            request.deferred.resolve(
+                request.opts.prepareOutput(data)
+            );
         })
         .error(function(error) {
             --simultaneouslyConnections.current;
             request.deferred.reject(error);
         });
 
-        request.startRequestFn();
+        request.opts.startRequestFn();
     };
 
 
     return {
-        get: function(url, startRequestFn) {
+        get: function(url, opts) {
+            opts = opts || {};
+            _.defaults(opts, {
+                startRequestFn: UtilsService.noop,
+                prepareOutput: function(data) {
+                    return data;
+                }
+            });
             var deferred = $q.defer();
 
             queue.push({
                 url: url,
-                startRequestFn: startRequestFn,
+                opts: opts,
                 deferred: deferred
             });
 
