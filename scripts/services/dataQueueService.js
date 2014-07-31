@@ -7,11 +7,12 @@ angular.module('walletApp').service('DataQueueService', function(
 ) {
     var queue = [];
     var simultaneouslyConnections = {
-        limit: 2,
+        limit: 8,
         current: 0
     };
     
     var resolveQueue = function() {
+        console.log(simultaneouslyConnections.current);
         if (simultaneouslyConnections.current >= simultaneouslyConnections.limit) {
             return;
         }
@@ -30,10 +31,12 @@ angular.module('walletApp').service('DataQueueService', function(
             request.deferred.resolve(
                 request.opts.prepareOutput(data)
             );
+            resolveQueue();
         })
         .error(function(error) {
             --simultaneouslyConnections.current;
             request.deferred.reject(error);
+            resolveQueue();
         });
 
         request.opts.startRequestFn();
