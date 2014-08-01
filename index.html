@@ -63,7 +63,8 @@
 <h3>{{ 'WALLET.TITLE' | translate }}</h3>
 
 <div ng-controller="WalletController">
-    <input type="button" ng-click="checkBalances()" value="&#8634;" />
+    <input type="button" class="button" ng-click="cleanWallet()" value="&times;" />
+    <input type="button" class="button" ng-click="checkBalances()" value="&#8634;" />
 
     <a href ng-click=" sortByBalance() ">{{ 'WALLET.SORT.BY_BALANCE' | translate }}</a>
 
