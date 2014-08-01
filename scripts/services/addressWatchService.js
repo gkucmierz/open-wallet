@@ -72,6 +72,7 @@ angular.module('walletApp').service('AddressWatchService', function(
             var i = watched.indexOf(address);
             if (i !== -1) {
                 watched.splice(i, 1);
+                $log.info('unwatched address: ' + address);
                 return true;
             }
             $log.warn('this address was not watched');

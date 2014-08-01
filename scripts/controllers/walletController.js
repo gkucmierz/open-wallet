@@ -42,4 +42,8 @@ angular.module('walletApp')
         return WalletDataService.getSum(type);
     };
 
+    $scope.clearWallet = function() {
+        WalletDataService.clear();
+    };
+
 });
