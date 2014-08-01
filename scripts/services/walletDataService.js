@@ -17,15 +17,6 @@ angular.module('walletApp').service('WalletDataService', function(
     var storageKey = 'wallet';
     var data, _this;
 
-    var moveArray = function(array1, array2) {
-        var tmp;
-        while (1) {
-            tmp = array1.shift();
-            if (angular.isUndefined(tmp)) break;
-            array2.push(tmp);
-        }
-    };
-
     var findAddress = function(address) {
         for (var i = 0, l = data.length; i < l; ++i) {
             if (data[i].address === address) return data[i];
@@ -207,14 +198,14 @@ angular.module('walletApp').service('WalletDataService', function(
         clear: function() {
             UndoActionService.doAction(function() {
                 var keptData = [];
-                
+
                 unwatchAll();
-                moveArray(data, keptData);
+                UtilsService.moveArray(data, keptData);
                 _this.save();
 
                 return {
                     reverse: function() {
-                        moveArray(keptData, data);
+                        UtilsService.moveArray(keptData, data);
                         _this.save();
                         watchAll();
                     },
