@@ -27,7 +27,8 @@
         "CLOSE": "close",
         "MESSAGES": {
             "DEFAULT": "Undo your action",
-            "DELETE_WALLET_ENTRY": "Restore a deleted entry from the wallet"
+            "DELETE_WALLET_ENTRY": "Restore a deleted entry from the wallet",
+            "CLEAR_WALLET": "Restore whole wallet"
         }
     }
 }
