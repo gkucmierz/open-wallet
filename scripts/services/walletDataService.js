@@ -98,6 +98,19 @@ angular.module('walletApp').service('WalletDataService', function(
         return true;
     };
 
+    var watchAllCreate = function(action) {
+        var fn = AddressWatchService[action];
+        return function() {
+            _.map(data, function(entry) {
+                fn(entry.address);
+            });
+        };
+    };
+
+    var watchAll = watchAllCreate('watch');
+    var unwatchAll = watchAllCreate('unwatch');
+
+
     var saveToStorage = _.throttle(function() {
         StorageService.set(storageKey, WalletCompressService.compress(data));
     }, 5e2);
@@ -194,15 +207,16 @@ angular.module('walletApp').service('WalletDataService', function(
         clear: function() {
             UndoActionService.doAction(function() {
                 var keptData = [];
+                
+                unwatchAll();
                 moveArray(data, keptData);
                 _this.save();
-                // AddressWatchService.unwatch(entry.address);
 
                 return {
                     reverse: function() {
                         moveArray(keptData, data);
                         _this.save();
-                        // AddressWatchService.watch(entry.address);
+                        watchAll();
                     },
                     translationKey: 'CLEAR_WALLET'
                 };
