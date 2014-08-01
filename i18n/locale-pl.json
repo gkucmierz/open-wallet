@@ -28,7 +28,7 @@
         "MESSAGES": {
             "DEFAULT": "Cofnij wykonaną czynność",
             "DELETE_WALLET_ENTRY": "Przywróć usunięty wpis z portfela",
-            "CLEAR_WALLET": "------- ----- ------"
+            "CLEAR_WALLET": "Przywróć cały portfel"
         }
     }
 }
