@@ -27,32 +27,25 @@ angular.module('walletApp').service('WalletDataService', function(
 
     var updateAddressBalance = function(entry) {
         var deferred = $q.defer();
-        var maxAttemps = 5; // TODO: make config
 
         var stopLoading = function() {
             delete entry.loading;
         };
 
-        (function loop() {
-            BitcoinDataService.getBalance(entry.address, function() {
-                entry.loading = true;
-            }).then(function(data) {
-                _.extend(entry, data);
-                stopLoading();
-                _this.save();
+        BitcoinDataService.getBalance(entry.address, function() {
+            entry.loading = true;
+        }).then(function(data) {
+            _.extend(entry, data);
+            stopLoading();
+            _this.save();
 
-                WalletEntryService.blink(entry, 'update');
+            WalletEntryService.blink(entry, 'update');
 
-                deferred.resolve();
-            }, function() {
-                if (--maxAttemps > 0) {
-                    loop();
-                } else {
-                    stopLoading();
-                    deferred.resolve();
-                }
-            });
-        })();
+            deferred.resolve();
+        }, function() {
+            stopLoading();
+            return updateAddressBalance(entry);
+        });
 
         return deferred.promise;
     };
@@ -183,18 +176,9 @@ angular.module('walletApp').service('WalletDataService', function(
             });
         },
         checkBalances: function() {
-            // var i = 0;
-            // (function loop() {
-            //     var entry = data[i++];
-            //     if (i > data.length) return;
-
-            //     updateAddressBalance(entry).then(loop);
-            // })();
-
             _.map(data, function(entry) {
                 updateAddressBalance(entry);
             });
-
         },
         save: function() {
             saveToStorage();
