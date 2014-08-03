@@ -46,6 +46,12 @@ angular.module('walletApp').directive('bulkAdd', function (
                             t.current = new Date();
                         } while (i < l && t.current - t.last < maxUnblockingTime);
 
+                        if (!scope.adding) {
+                            // cancel processing if user cancels action
+                            scope.processing = false;
+                            return;
+                        }
+
                         if (i < l) {
                             setTimeout(loop, 0);
                         } else {
