@@ -20,7 +20,8 @@
             "INPUT_PLACEHOLDER": "Введите данные здесь",
             "CANCEL_BUTTON": "Отмена",
             "CONFIRM_BUTTON": "добавить адреса",
-            "CLOSE_DIALOG": "Закрыть"
+            "CLOSE_DIALOG": "Закрыть",
+            "PROCESSING_INPUT": "---------- ----- ----…"
         }
     },
     "UNDO_DIALOG": {
