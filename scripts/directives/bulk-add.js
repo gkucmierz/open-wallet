@@ -74,6 +74,7 @@ angular.module('walletApp').directive('bulkAdd', function (
                     var fetchedAddresses = _.map(scope.foundEntries, function(entry) {
                         return entry.address;
                     });
+                    scope.foundEntries = [];
                     scope.addCallback(fetchedAddresses);
                 });
                 scope.cancel();
