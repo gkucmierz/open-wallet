@@ -20,7 +20,8 @@
             "INPUT_PLACEHOLDER": "put data here",
             "CANCEL_BUTTON": "cancel",
             "CONFIRM_BUTTON": "add addresses",
-            "CLOSE_DIALOG": "close"
+            "CLOSE_DIALOG": "close",
+            "PROCESSING_INPUT": "Processing input data…"
         }
     },
     "UNDO_DIALOG": {
