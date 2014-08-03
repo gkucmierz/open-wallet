@@ -2,16 +2,18 @@
 
 angular.module('walletApp').directive('bulkAdd', function (
     $timeout,
-    PathGeneratorService
+    PathGeneratorService,
+    BitcoreService
 ) {
     // https://en.bitcoin.it/wiki/Address
     // A Bitcoin address, or simply address, is an identifier of 27-34 alphanumeric characters, beginning with the number 1 or 3, that represents a possible destination for a Bitcoin payment.
     var bitcoinAddressRegExp = /[1-3][a-zA-Z0-9]{26,33}/g;
+    var maxUnblockingTime = 30;
 
-    // var isValidAddress = function(address) {
-    //     var addr = new BitcoreService.Address(address);
-    //     return addr.isValid();
-    // };
+    var isValidAddress = function(address) {
+        var addr = new BitcoreService.Address(address);
+        return addr.isValid();
+    };
 
     return {
         restrict: 'C',
@@ -24,18 +26,41 @@ angular.module('walletApp').directive('bulkAdd', function (
             scope.inputText = '';
 
             var updateAddressesList = _.throttle(function(inputText) {
-                var uniquePotentialAddresses = _.unique(inputText.match(bitcoinAddressRegExp));
+                // scope.processing = true;
 
-                var allEntries = _.map(uniquePotentialAddresses, function(address) {
-                    return {
-                        address: address
+                setTimeout(function() {
+                    var uniquePotentialAddresses = _.unique(inputText.match(bitcoinAddressRegExp));
+                    var allEntries = [];
+
+                    var i = 0;
+                    var l = uniquePotentialAddresses.length;
+                    var t = {
+                        last: new Date()
                     };
-                });
+                    (function loop() {
+                        var address;
+                        t.last = new Date();
 
-                scope.foundEntries = allEntries;
-                // scope.foundEntries = _.filter(allEntries, function(entry) {
-                //     return isValidAddress(entry.address);
-                // });
+                        do {
+                            address = uniquePotentialAddresses[i++];
+                            if (isValidAddress(address)) {
+                                allEntries.push({
+                                    address: address
+                                });
+                            }
+                            t.current = new Date();
+                        } while (i < l && t.current - t.last < maxUnblockingTime);
+
+                        if (i < l) {
+                            setTimeout(loop, 0);
+                        } else {
+                            $timeout(function() {
+                                // scope.processing = false;
+                                scope.foundEntries = allEntries;
+                            }, 0);
+                        }
+                    })();
+                }, 0);
             }, 5e2);
 
             scope.cancel = function() {
@@ -52,9 +77,7 @@ angular.module('walletApp').directive('bulkAdd', function (
             };
 
             scope.$watch('inputText', function(inputText) {
-                $timeout(function() {
-                    updateAddressesList(inputText);
-                }, 0);
+                updateAddressesList(inputText);
             });
 
             scope.$watch('adding', function(adding) {
