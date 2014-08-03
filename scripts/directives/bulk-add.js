@@ -70,10 +70,12 @@ angular.module('walletApp').directive('bulkAdd', function (
             };
 
             scope.add = function() {
-                var fetchedAddresses = _.map(scope.foundEntries, function(entry) {
-                    return entry.address;
+                $timeout(function() {
+                    var fetchedAddresses = _.map(scope.foundEntries, function(entry) {
+                        return entry.address;
+                    });
+                    scope.addCallback(fetchedAddresses);
                 });
-                scope.addCallback(fetchedAddresses);
                 scope.cancel();
             };
 

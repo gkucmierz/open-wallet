@@ -18,7 +18,7 @@
 
             <div class="buttons">
                 <input type="button" value="{{ 'WALLET.BULK_ADD.CANCEL_BUTTON' | translate }}" ng-click=" cancel() " />
-                <input type="button" value="{{ 'WALLET.BULK_ADD.CONFIRM_BUTTON' | translate }}" ng-click=" add() " />
+                <input type="button" value="{{ 'WALLET.BULK_ADD.CONFIRM_BUTTON' | translate }}" ng-click=" add() " ng-disabled= "processing" />
             </div>
         </div>
     </div>
