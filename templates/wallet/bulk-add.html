@@ -9,9 +9,13 @@
         </div>
 
         <div class="founded-entries">
-            <ul>
+            <ul ng-hide=" processing ">
                 <li ng-repeat=" entry in foundEntries ">{{ entry.address }}</li>
             </ul>
+            <span ng-show=" processing ">
+                Processing input…
+            </span>
+
             <div class="buttons">
                 <input type="button" value="{{ 'WALLET.BULK_ADD.CANCEL_BUTTON' | translate }}" ng-click=" cancel() " />
                 <input type="button" value="{{ 'WALLET.BULK_ADD.CONFIRM_BUTTON' | translate }}" ng-click=" add() " />

@@ -26,7 +26,7 @@ angular.module('walletApp').directive('bulkAdd', function (
             scope.inputText = '';
 
             var updateAddressesList = _.throttle(function(inputText) {
-                // scope.processing = true;
+                scope.processing = true;
 
                 setTimeout(function() {
                     var uniquePotentialAddresses = _.unique(inputText.match(bitcoinAddressRegExp));
@@ -55,7 +55,7 @@ angular.module('walletApp').directive('bulkAdd', function (
                             setTimeout(loop, 0);
                         } else {
                             $timeout(function() {
-                                // scope.processing = false;
+                                scope.processing = false;
                                 scope.foundEntries = allEntries;
                             }, 0);
                         }
