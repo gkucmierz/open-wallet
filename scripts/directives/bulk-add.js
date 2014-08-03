@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('walletApp').directive('bulkAdd', function (
+    $timeout,
     PathGeneratorService,
     BitcoreService
 ) {
@@ -23,6 +24,20 @@ angular.module('walletApp').directive('bulkAdd', function (
             scope.foundEntries = [];
             scope.inputText = '';
 
+            var updateAddressesList = _.throttle(function(inputText) {
+                var uniquePotentialAddresses = _.unique(inputText.match(bitcoinAddressRegExp));
+
+                var allEntries = _.map(uniquePotentialAddresses, function(address) {
+                    return {
+                        address: address
+                    };
+                });
+
+                scope.foundEntries = _.filter(allEntries, function(entry) {
+                    return isValidAddress(entry.address);
+                });
+            }, 5e2);
+
             scope.cancel = function() {
                 scope.inputText = '';
                 scope.adding = false;
@@ -37,17 +52,9 @@ angular.module('walletApp').directive('bulkAdd', function (
             };
 
             scope.$watch('inputText', function(inputText) {
-                var uniquePotentialAddresses = _.unique(inputText.match(bitcoinAddressRegExp));
-
-                var allEntries = _.map(uniquePotentialAddresses, function(address) {
-                    return {
-                        address: address
-                    };
-                });
-
-                scope.foundEntries = _.filter(allEntries, function(entry) {
-                    return isValidAddress(entry.address);
-                });
+                $timeout(function() {
+                    updateAddressesList(inputText);
+                }, 0);
             });
 
             scope.$watch('adding', function(adding) {
