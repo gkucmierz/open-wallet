@@ -45,7 +45,7 @@ angular.module('walletApp').service('VanityAddressService', function(
                         break;
                     }
                 }
-                loop();
+                setTimeout(loop, 0);
             })();
 
             return deferred.promise;
