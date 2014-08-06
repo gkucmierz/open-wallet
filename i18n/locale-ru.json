@@ -20,14 +20,16 @@
             "INPUT_PLACEHOLDER": "Введите данные здесь",
             "CANCEL_BUTTON": "Отмена",
             "CONFIRM_BUTTON": "добавить адреса",
-            "CLOSE_DIALOG": "Закрыть"
+            "CLOSE_DIALOG": "Закрыть",
+            "PROCESSING_INPUT": "---------- ----- ----…"
         }
     },
     "UNDO_DIALOG": {
         "CLOSE": "Закрыть",
         "MESSAGES": {
             "DEFAULT": "Отмена",
-            "DELETE_WALLET_ENTRY": "Восстановить удаленную запись из кошелька"
+            "DELETE_WALLET_ENTRY": "Восстановить удаленную запись из кошелька",
+            "CLEAR_WALLET": "------- ----- ------"
         }
     }
 }

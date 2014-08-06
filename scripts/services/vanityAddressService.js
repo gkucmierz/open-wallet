@@ -14,7 +14,7 @@
 
 //     return {
 //         fromRegExp: function(regexp) {
-
+            
 //         }
 //     };
 // });

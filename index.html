@@ -18,6 +18,7 @@
     <script src="vendor/ngstorage/ngStorage.min.js"></script>
     <script src="vendor/angular-translate/angular-translate.js"></script>
     <script src="vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
     <script src="vendor/bitcore/browser/bundle.js"></script>
     <script src="vendor/lodash/lodash.js"></script>
 
@@ -45,6 +46,7 @@
     <script src="scripts/services/addressWatchService.js"></script>
     <script src="scripts/services/eventListenerService.js"></script>
     <script src="scripts/services/vanityAddressService.js"></script>
+    <script src="scripts/services/dataQueueService.js"></script>
 
     <!-- directives -->
     <script src="scripts/directives/undoDialog.js"></script>
@@ -62,7 +64,8 @@
 <h3>{{ 'WALLET.TITLE' | translate }}</h3>
 
 <div ng-controller="WalletController">
-    <input type="button" ng-click="checkBalances()" value="&#8634;" />
+    <input type="button" class="button" ng-click="clearWallet()" value="&times;" />
+    <input type="button" class="button" ng-click="checkBalances()" value="&#8634;" />
 
     <a href ng-click=" sortByBalance() ">{{ 'WALLET.SORT.BY_BALANCE' | translate }}</a>
 

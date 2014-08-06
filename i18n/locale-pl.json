@@ -20,14 +20,16 @@
             "INPUT_PLACEHOLDER": "umieść dane tutaj",
             "CANCEL_BUTTON": "anuluj",
             "CONFIRM_BUTTON": "dodaj adresy",
-            "CLOSE_DIALOG": "zamknij"
+            "CLOSE_DIALOG": "zamknij",
+            "PROCESSING_INPUT": "Przetwarzanie danych wejściowych…"
         }
     },
     "UNDO_DIALOG": {
         "CLOSE": "zamknij",
         "MESSAGES": {
             "DEFAULT": "Cofnij wykonaną czynność",
-            "DELETE_WALLET_ENTRY": "Przywróć usunięty wpis z portfela"
+            "DELETE_WALLET_ENTRY": "Przywróć usunięty wpis z portfela",
+            "CLEAR_WALLET": "Przywróć cały portfel"
         }
     }
 }

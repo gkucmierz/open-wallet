@@ -17,7 +17,6 @@ angular.module('walletApp').service('WalletDataService', function(
     var storageKey = 'wallet';
     var data, _this;
 
-
     var findAddress = function(address) {
         for (var i = 0, l = data.length; i < l; ++i) {
             if (data[i].address === address) return data[i];
@@ -27,32 +26,25 @@ angular.module('walletApp').service('WalletDataService', function(
 
     var updateAddressBalance = function(entry) {
         var deferred = $q.defer();
-        var maxAttemps = 3; // TODO: make config
-
-        entry.loading = true;
 
         var stopLoading = function() {
             delete entry.loading;
         };
 
-        (function loop() {
-            BitcoinDataService.getBalance(entry.address).then(function(data) {
-                _.extend(entry, data);
-                stopLoading();
-                _this.save();
+        BitcoinDataService.getBalance(entry.address, function() {
+            entry.loading = true;
+        }).then(function(data) {
+            _.extend(entry, data);
+            stopLoading();
+            _this.save();
 
-                WalletEntryService.blink(entry, 'update');
+            WalletEntryService.blink(entry, 'update');
 
-                deferred.resolve();
-            }, function() {
-                if (--maxAttemps > 0) {
-                    loop();
-                } else {
-                    stopLoading();
-                    deferred.resolve();
-                }
-            });
-        })();
+            deferred.resolve();
+        }, function() {
+            stopLoading();
+            return updateAddressBalance(entry);
+        });
 
         return deferred.promise;
     };
@@ -96,6 +88,19 @@ angular.module('walletApp').service('WalletDataService', function(
 
         return true;
     };
+
+    var watchAllCreate = function(action) {
+        var fn = AddressWatchService[action];
+        return function() {
+            _.map(data, function(entry) {
+                fn(entry.address);
+            });
+        };
+    };
+
+    var watchAll = watchAllCreate('watch');
+    var unwatchAll = watchAllCreate('unwatch');
+
 
     var saveToStorage = _.throttle(function() {
         StorageService.set(storageKey, WalletCompressService.compress(data));
@@ -183,17 +188,30 @@ angular.module('walletApp').service('WalletDataService', function(
             });
         },
         checkBalances: function() {
-            var i = 0;
-
-            (function loop() {
-                var entry = data[i++];
-                if (i > data.length) return;
-
-                updateAddressBalance(entry).then(loop);
-            })();
+            _.map(data, function(entry) {
+                updateAddressBalance(entry);
+            });
         },
         save: function() {
             saveToStorage();
+        },
+        clear: function() {
+            UndoActionService.doAction(function() {
+                var keptData = [];
+
+                unwatchAll();
+                UtilsService.moveArray(data, keptData);
+                _this.save();
+
+                return {
+                    reverse: function() {
+                        UtilsService.moveArray(keptData, data);
+                        _this.save();
+                        watchAll();
+                    },
+                    translationKey: 'CLEAR_WALLET'
+                };
+            });
         },
         data: data
     };

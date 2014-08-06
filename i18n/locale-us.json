@@ -20,14 +20,16 @@
             "INPUT_PLACEHOLDER": "put data here",
             "CANCEL_BUTTON": "cancel",
             "CONFIRM_BUTTON": "add addresses",
-            "CLOSE_DIALOG": "close"
+            "CLOSE_DIALOG": "close",
+            "PROCESSING_INPUT": "Processing input data…"
         }
     },
     "UNDO_DIALOG": {
         "CLOSE": "close",
         "MESSAGES": {
             "DEFAULT": "Undo your action",
-            "DELETE_WALLET_ENTRY": "Restore a deleted entry from the wallet"
+            "DELETE_WALLET_ENTRY": "Restore a deleted entry from the wallet",
+            "CLEAR_WALLET": "Restore whole wallet"
         }
     }
 }
