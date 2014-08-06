@@ -14,6 +14,13 @@ angular.module('walletApp').service('VanityAddressService', function(
         };
     };
 
+    var str2regExp = function(str) {
+        if (!str.match(/^[123]/)) {
+            str = '1' + str;
+        }
+        return new RegExp('^' + str);
+    };
+
     return {
         fromRegExp: function(regexp) {
             var deferred = $q.defer();
@@ -43,6 +50,9 @@ angular.module('walletApp').service('VanityAddressService', function(
             })();
 
             return deferred.promise;
+        },
+        fromString: function(string) {
+            return this.fromRegExp(str2regExp(string));
         }
     };
 });
