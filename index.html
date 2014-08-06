@@ -139,9 +139,23 @@
 
     <br/>
 
-    <input type="text" ng-model="inputEntry" placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}" />
-    <input type="button" ng-click="addEntry()" value="+" title="add new address" />
-    <input type="button" ng-click="generateVanity()" value="v" title="generate vanity address" />
+    <input
+        type="text"
+        ng-model="inputEntry"
+        placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}"
+    />
+    <input
+        type="button"
+        ng-click="addEntry()"
+        value="+"
+        title="{{ 'WALLET.BUTTONS.ADD_TITLE' | translate }}"
+    />
+    <input
+        type="button"
+        ng-click="generateVanity()"
+        value="v"
+        title="{{ 'WALLET.BUTTONS.VANITY_TITLE' | translate }}"
+    />
 
     <span class="bulk-add" add-callback="addAddresses"></span>
 
