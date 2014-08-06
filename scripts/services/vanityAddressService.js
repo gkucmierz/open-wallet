@@ -34,7 +34,6 @@ angular.module('walletApp').service('VanityAddressService', function(
             };
 
             (function loop() {
-                console.log('dupa');
                 while (1) {
                     t.current = new Date();
                     var rand = generateRandom();
