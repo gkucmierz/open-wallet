@@ -4,7 +4,11 @@ angular.module('walletApp')
 .controller('WalletController', function(
     $scope,
     WalletDataService
+    // VanityAddressService
 ) {
+    // VanityAddressService.fromRegExp(/^1B/).then(function(res) {
+    //     console.log(res);
+    // });
 
     $scope.wallet = WalletDataService.data;
 

@@ -4,7 +4,6 @@ angular.module('walletApp').service('BitcoinUtilsService', function(
     $log,
     BitcoreService
 ) {
-    // window.b = BitcoreService;
 
     return {
         isValidAddress: function(address) {
