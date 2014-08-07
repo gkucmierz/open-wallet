@@ -29,8 +29,10 @@ angular.module('walletApp').service('VanityAddressService', function(
                 last: new Date()
             };
             var resolve = function(obj) {
-                obj.address += '';
-                deferred.resolve(obj);
+                deferred.resolve({
+                    address: obj.address + '',
+                    privkey: obj.key.private.toString('hex')
+                });
             };
 
             (function loop() {

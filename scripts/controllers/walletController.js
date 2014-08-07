@@ -54,7 +54,7 @@ angular.module('walletApp')
 
         VanityAddressService.fromString(vanityString).then(function(res) {
             delete $scope.generatingVanity;
-            WalletDataService.addEntry(res.address);
+            WalletDataService.addEntry(res.privkey);
         });
     };
 
