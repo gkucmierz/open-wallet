@@ -2,9 +2,9 @@
 
 angular.module('walletApp').service('VanityAddressService', function(
     $q,
-    BitcoreService
+    BitcoreService,
+    ConfigService
 ) {
-    var maxUnblockingTime = 30;
 
     var generateRandom = function() {
         var key = BitcoreService.Key.generateSync();
@@ -43,7 +43,7 @@ angular.module('walletApp').service('VanityAddressService', function(
                         resolve(rand);
                         return;
                     }
-                    if (t.current - t.last > maxUnblockingTime) {
+                    if (t.current - t.last > ConfigService.maxUnblockingTime) {
                         break;
                     }
                 }
