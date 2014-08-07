@@ -27,6 +27,10 @@
             "CLOSE_DIALOG": "close",
             "PROCESSING_INPUT": "Processing input data…",
             "BUTTON_TITLE": "bulk add addresses"
+        },
+        "SEND": {
+            "VALUE_PLACEHOLDER": "send value",
+            "BUTTON_SEND": "send"
         }
     },
     "UNDO_DIALOG": {
