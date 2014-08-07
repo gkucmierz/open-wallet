@@ -3,12 +3,12 @@
 angular.module('walletApp').directive('bulkAdd', function (
     $timeout,
     PathGeneratorService,
-    BitcoinUtilsService
+    BitcoinUtilsService,
+    ConfigService
 ) {
     // https://en.bitcoin.it/wiki/Address
     // A Bitcoin address, or simply address, is an identifier of 27-34 alphanumeric characters, beginning with the number 1 or 3, that represents a possible destination for a Bitcoin payment.
     var bitcoinAddressRegExp = /[1-3][a-zA-Z0-9]{26,33}/g;
-    var maxUnblockingTime = 30;
 
     return {
         restrict: 'C',
@@ -44,7 +44,7 @@ angular.module('walletApp').directive('bulkAdd', function (
                                 });
                             }
                             t.current = new Date();
-                        } while (i < l && t.current - t.last < maxUnblockingTime);
+                        } while (i < l && t.current - t.last < ConfigService.maxUnblockingTime);
 
                         if (!scope.adding) {
                             // cancel processing if user cancels action
