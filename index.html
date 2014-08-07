@@ -45,6 +45,7 @@
     <script src="scripts/services/walletCompressService.js"></script>
     <script src="scripts/services/addressWatchService.js"></script>
     <script src="scripts/services/eventListenerService.js"></script>
+    <script src="scripts/services/vanityAddressService.js"></script>
     <script src="scripts/services/dataQueueService.js"></script>
 
     <!-- directives -->
@@ -138,8 +139,24 @@
 
     <br/>
 
-    <input type="text" ng-model="inputEntry" placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}" />
-    <input type="button" ng-click="addEntry()" value="+" />
+    <input
+        type="text"
+        ng-model="inputEntry"
+        placeholder="{{ 'WALLET.ADD.PLACEHOLDER' | translate }}"
+    />
+    <input
+        type="button"
+        ng-click="addEntry()"
+        value="+"
+        title="{{ 'WALLET.BUTTONS.ADD_TITLE' | translate }}"
+    />
+    <input
+        type="button"
+        ng-click="generateVanity()"
+        value="v"
+        title="{{ 'WALLET.BUTTONS.VANITY_TITLE' | translate }}"
+        ng-disabled="generatingVanity"
+    />
 
     <span class="bulk-add" add-callback="addAddresses"></span>
 

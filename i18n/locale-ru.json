@@ -15,13 +15,18 @@
         "SORT": {
             "BY_BALANCE": "сортировать по балансу счета"
         },
+        "BUTTONS": {
+            "ADD_TITLE": "--- --- -------",
+            "VANITY_TITLE": "-------- ------ -------"
+        },
         "BULK_ADD": {
             "ADD_BUTTON": "…",
             "INPUT_PLACEHOLDER": "Введите данные здесь",
             "CANCEL_BUTTON": "Отмена",
             "CONFIRM_BUTTON": "добавить адреса",
             "CLOSE_DIALOG": "Закрыть",
-            "PROCESSING_INPUT": "---------- ----- ----…"
+            "PROCESSING_INPUT": "---------- ----- ----…",
+            "BUTTON_TITLE": "---- --- ---------"
         }
     },
     "UNDO_DIALOG": {

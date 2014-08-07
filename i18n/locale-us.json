@@ -15,13 +15,18 @@
         "SORT": {
             "BY_BALANCE": "sort by balance"
         },
+        "BUTTONS": {
+            "ADD_TITLE": "add new address",
+            "VANITY_TITLE": "generate vanity address"
+        },
         "BULK_ADD": {
             "ADD_BUTTON": "…",
             "INPUT_PLACEHOLDER": "put data here",
             "CANCEL_BUTTON": "cancel",
             "CONFIRM_BUTTON": "add addresses",
             "CLOSE_DIALOG": "close",
-            "PROCESSING_INPUT": "Processing input data…"
+            "PROCESSING_INPUT": "Processing input data…",
+            "BUTTON_TITLE": "bulk add addresses"
         }
     },
     "UNDO_DIALOG": {

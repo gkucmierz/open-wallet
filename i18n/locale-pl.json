@@ -15,13 +15,18 @@
         "SORT": {
             "BY_BALANCE": "sortuj według stanu kont"
         },
+        "BUTTONS": {
+            "ADD_TITLE": "dodaj nowy adres",
+            "VANITY_TITLE": "utwórz vanity adres"
+        },
         "BULK_ADD": {
             "ADD_BUTTON": "…",
             "INPUT_PLACEHOLDER": "umieść dane tutaj",
             "CANCEL_BUTTON": "anuluj",
             "CONFIRM_BUTTON": "dodaj adresy",
             "CLOSE_DIALOG": "zamknij",
-            "PROCESSING_INPUT": "Przetwarzanie danych wejściowych…"
+            "PROCESSING_INPUT": "Przetwarzanie danych wejściowych…",
+            "BUTTON_TITLE": "dodaj adresy masowo"
         }
     },
     "UNDO_DIALOG": {

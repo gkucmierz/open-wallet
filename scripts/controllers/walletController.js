@@ -3,7 +3,8 @@
 angular.module('walletApp')
 .controller('WalletController', function(
     $scope,
-    WalletDataService
+    WalletDataService,
+    VanityAddressService
 ) {
 
     $scope.wallet = WalletDataService.data;
@@ -44,6 +45,17 @@ angular.module('walletApp')
 
     $scope.clearWallet = function() {
         WalletDataService.clear();
+    };
+
+    $scope.generateVanity = function() {
+        var vanityString = ($scope.inputEntry || '').trim();
+        $scope.inputEntry = '';
+        $scope.generatingVanity = true;
+
+        VanityAddressService.fromString(vanityString).then(function(res) {
+            delete $scope.generatingVanity;
+            WalletDataService.addEntry(res.privkey);
+        });
     };
 
 });
