@@ -49,8 +49,11 @@ angular.module('walletApp')
 
     $scope.generateVanity = function() {
         var vanityString = ($scope.inputEntry || '').trim();
+        $scope.inputEntry = '';
+        $scope.generatingVanity = true;
 
         VanityAddressService.fromString(vanityString).then(function(res) {
+            delete $scope.generatingVanity;
             WalletDataService.addEntry(res.address);
         });
     };

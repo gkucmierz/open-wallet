@@ -155,6 +155,7 @@
         ng-click="generateVanity()"
         value="v"
         title="{{ 'WALLET.BUTTONS.VANITY_TITLE' | translate }}"
+        ng-disabled="generatingVanity"
     />
 
     <span class="bulk-add" add-callback="addAddresses"></span>
