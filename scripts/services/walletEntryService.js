@@ -12,6 +12,7 @@ angular.module('walletApp').service('WalletEntryService', function(
     };
 
     return {
+        ENTRY_TYPES: ENTRY_TYPES,
         determineType: function(entry) {
             if (!_.isUndefined( entry.encryptedPrivkey )) {
                 entry.type = ENTRY_TYPES.ENCRYPTED_PRIVKEY;
@@ -38,6 +39,9 @@ angular.module('walletApp').service('WalletEntryService', function(
             $timeout(function() {
                 delete entry[property];
             }, 50);
+        },
+        isPrivkey: function(entry) {
+            return entry.type === ENTRY_TYPES.PRIVKEY;
         }
     };
 });
