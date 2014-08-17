@@ -5,8 +5,16 @@ angular.module('walletApp')
     $scope,
     WalletDataService,
     VanityAddressService,
-    WalletEntryService
+    WalletEntryService//,
+    // BitcoinDataService
 ) {
+
+    // BitcoinDataService.getUnspent('1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh', function() {
+    //     console.log('start');
+    // }).then(function() {
+    //     console.log('end');
+    // });
+
 
     $scope.wallet = WalletDataService.data;
 
