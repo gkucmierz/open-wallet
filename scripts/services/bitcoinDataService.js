@@ -38,19 +38,18 @@ angular.module('walletApp').service('BitcoinDataService', function(
                     };
                 }
             });
-        }//,
-        // getUnspent: function(address, startRequestFn) {
-        //     var patternUrl = 'http://blockchain.info/unconfirmed-transactions?format=json';
-        //     // var patternUrl = 'http://blockchain.info/unspent?active=%1';
-        //     var url = proxyUrl(patternUrl.replace('%1', address));
+        },
+        getUnspent: function(address, startRequestFn) {
+            var patternUrl = 'http://blockchain.info/unspent?active=%1';
+            var url = proxyUrl(patternUrl.replace('%1', address));
 
-        //     return DataQueueService.get(url, {
-        //         startRequestFn: startRequestFn,
-        //         prepareOutput: function(data) {
-        //             console.log(data);
-        //             return data;
-        //         }
-        //     });
-        // }
+            return DataQueueService.get(url, {
+                startRequestFn: startRequestFn,
+                prepareOutput: function(data) {
+                    var json = getJson(data);
+                    return pick(json, 'unspent_outputs');
+                }
+            });
+        }
     };
 });
