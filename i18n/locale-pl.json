@@ -27,6 +27,10 @@
             "CLOSE_DIALOG": "zamknij",
             "PROCESSING_INPUT": "Przetwarzanie danych wejściowych…",
             "BUTTON_TITLE": "dodaj adresy masowo"
+        },
+        "SEND": {
+            "VALUE_PLACEHOLDER": "kwota do wysłania",
+            "BUTTON_SEND": "wyślij"
         }
     },
     "UNDO_DIALOG": {

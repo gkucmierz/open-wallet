@@ -27,6 +27,10 @@
             "CLOSE_DIALOG": "Закрыть",
             "PROCESSING_INPUT": "---------- ----- ----…",
             "BUTTON_TITLE": "---- --- ---------"
+        },
+        "SEND": {
+            "VALUE_PLACEHOLDER": "---- -----",
+            "BUTTON_SEND": "----"
         }
     },
     "UNDO_DIALOG": {

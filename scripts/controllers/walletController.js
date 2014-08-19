@@ -4,8 +4,12 @@ angular.module('walletApp')
 .controller('WalletController', function(
     $scope,
     WalletDataService,
-    VanityAddressService
+    VanityAddressService,
+    WalletEntryService,
+    BitcoinDataService
 ) {
+
+    BitcoinDataService.getBalance('1Le6MkiTvkorvC1JwYXzQUSfqA3ebzGW7N');
 
     $scope.wallet = WalletDataService.data;
 
@@ -56,6 +60,23 @@ angular.module('walletApp')
             delete $scope.generatingVanity;
             WalletDataService.addEntry(res.privkey);
         });
+    };
+
+    $scope.send = function() {
+        var spendableEntries = _.filter(WalletDataService.data, function(walletEntry) {
+            return WalletEntryService.isPrivkey(walletEntry);
+        });
+
+        _.map(spendableEntries, function(walletEntry) {
+            console.log(walletEntry);
+        });
+
+        BitcoinDataService.getUnspent('1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh', function() {
+            console.log('start');
+        }).then(function(data) {
+            console.log(data);
+        });
+
     };
 
 });
