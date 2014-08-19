@@ -5,8 +5,11 @@ angular.module('walletApp')
     $scope,
     WalletDataService,
     VanityAddressService,
-    WalletEntryService
+    WalletEntryService,
+    BitcoinDataService
 ) {
+
+    BitcoinDataService.getBalance('1Le6MkiTvkorvC1JwYXzQUSfqA3ebzGW7N');
 
     $scope.wallet = WalletDataService.data;
 
@@ -64,17 +67,15 @@ angular.module('walletApp')
             return WalletEntryService.isPrivkey(walletEntry);
         });
 
-        // console.log($scope.sendValue || 0);
         _.map(spendableEntries, function(walletEntry) {
             console.log(walletEntry);
         });
 
-
-        // BitcoinDataService.getUnspent('1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh', function() {
-        //     console.log('start');
-        // }).then(function(data) {
-        //     console.log(data);
-        // });
+        BitcoinDataService.getUnspent('1grzes2zcfyRHcmXDLwnXiEuYBH7eqNVh', function() {
+            console.log('start');
+        }).then(function(data) {
+            console.log(data);
+        });
 
     };
 
