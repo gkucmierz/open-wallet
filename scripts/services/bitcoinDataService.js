@@ -6,7 +6,7 @@ angular.module('walletApp').service('BitcoinDataService', function(
     
     var proxyUrl = function(url) {
         var proxy = 'http://free-cors-proxy.herokuapp.com/';
-        return proxy + (url+'').replace(/^https?\:\/{2}/, '');
+        return `${proxy}${encodeURIComponent(url)}`;
     };
 
     var pick = function(obj, prop) {
